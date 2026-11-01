@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseURL</key>
+	<string>https://redaktion.molo.news/api/v4</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>molonews</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>molonews</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Erhalte Push-Nachrichten zu aktuellen Beiträgen.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:moloApp/moloApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:moloFeatures/moloFeatures.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:moloCore/moloCore.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:moloUI/moloUI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:moloResources/moloResources.xcodeproj">
+   </FileRef>
+</Workspace>

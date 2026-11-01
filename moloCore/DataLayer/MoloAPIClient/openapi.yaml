@@ -1,0 +1,5726 @@
+openapi: 3.0.1
+info:
+  title: Molonews API
+  description: Molonews API
+  version: v4
+servers:
+- url: https://redaktion.molo.news/api/v4
+security:
+- Basic: []
+paths:
+  /AI/generate-article-tags/:
+    post:
+      tags:
+      - AI
+      description: This class returns the tags for a posted article using Ollama with
+        Gemma 3
+      operationId: AI_generate-article-tags_create
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the article
+                abstract:
+                  type: string
+                  description: The abstract of the article
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the article
+                abstract:
+                  type: string
+                  description: The abstract of the article
+        required: true
+      responses:
+        "200":
+          description: List of Tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagSerializerId'
+        "204":
+          description: No Content
+          content: {}
+        "400":
+          description: Bad Request
+          content: {}
+  /AI/generate-event-tags/:
+    post:
+      tags:
+      - AI
+      description: This class returns the tags for a posted event using Ollama with
+        Gemma 3
+      operationId: AI_generate-event-tags_create
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the event
+                abstract:
+                  type: string
+                  description: The description of the event
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the event
+                abstract:
+                  type: string
+                  description: The description of the event
+        required: true
+      responses:
+        "200":
+          description: List of Event Tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagSerializerId'
+        "204":
+          description: No Content
+          content: {}
+        "400":
+          description: Bad Request
+          content: {}
+  /admin/test-push/:
+    post:
+      tags:
+      - admin
+      description: POST /api/v4/admin/test-push/
+      operationId: admin_test-push_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - code
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: Zugangscode (erforderlich)
+                device_id:
+                  type: string
+                  description: Device ID des Users
+                firebase_token:
+                  type: string
+                  description: Firebase Token direkt (alternativ
+                title:
+                  type: string
+                  description: Push-Titel (Custom-Modus)
+                  default: Test Nachricht
+                message:
+                  type: string
+                  description: Push-Nachricht (Custom-Modus)
+                  default: Dies ist eine Test-Nachricht
+                article_id:
+                  type: integer
+                  description: Artikel-ID (Artikel-Modus)
+                event_id:
+                  type: integer
+                  description: Event-ID (Event-Modus)
+                data:
+                  type: object
+                  properties: {}
+                  description: Zusätzliche Daten als JSON (Custom-Modus)
+        required: true
+      responses:
+        "200":
+          description: Push erfolgreich gesendet
+          content: {}
+        "400":
+          description: Fehlerhafte Anfrage
+          content: {}
+        "401":
+          description: Ungültiger Zugangscode
+          content: {}
+        "404":
+          description: Ressource nicht gefunden
+          content: {}
+      x-codegen-request-body-name: data
+  /ai-area/articles/get-unassigned-batch/:
+    get:
+      tags:
+      - ai-area
+      description: "Holt mehrere Artikel ohne Gebietszuweisung auf einmal (nur letzte\
+        \ 30 Tage, nur von Quellen mit auto_detect_area_from_content=True). Query\
+        \ Parameter: limit - Anzahl der Artikel (default: 10, max: 100)"
+      operationId: ai-area_articles_get-unassigned-batch_read
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: "Anzahl der Artikel (default: 10, max: 100)"
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Artikel ohne Gebietszuweisung gefunden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        abstract:
+                          type: string
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+  /ai-area/articles/get-unassigned/:
+    get:
+      tags:
+      - ai-area
+      description: "Holt einen Artikel ohne Gebietszuweisung (nur letzte 30 Tage,\
+        \ nur published, nur von Quellen mit auto_detect_area_from_content=True)."
+      operationId: ai-area_articles_get_unassigned
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Artikel ohne Gebietszuweisung gefunden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  abstract:
+                    type: string
+                  current_areas:
+                    type: array
+                    items:
+                      type: integer
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+        "404":
+          description: Not Found - No articles without area assignment found
+          content: {}
+  /ai-area/articles/submit-areas-batch/:
+    post:
+      tags:
+      - ai-area
+      description: Weist mehreren Artikeln Gebiete zu
+      operationId: ai-area_articles_submit_areas_batch
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - articles
+              type: object
+              properties:
+                articles:
+                  type: array
+                  description: Liste von Artikeln mit ihren Gebieten
+                  items:
+                    required:
+                    - article_id
+                    type: object
+                    properties:
+                      article_id:
+                        type: integer
+                        description: ID des Artikels
+                      area_names:
+                        type: array
+                        description: Liste der Stadt-Namen (werden automatisch erstellt
+                          wenn nicht vorhanden)
+                        items:
+                          type: string
+                      area_ids:
+                        type: array
+                        description: "Liste der Gebiets-IDs (optional, alternativ\
+                          \ zu area_names)"
+                        items:
+                          type: integer
+        required: true
+      responses:
+        "200":
+          description: Batch-Gebietszuweisung abgeschlossen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        article_id:
+                          type: integer
+                        success:
+                          type: boolean
+                        error:
+                          type: string
+                        areas_applied:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              name:
+                                type: string
+                              created:
+                                type: boolean
+                                description: War die Area neu erstellt?
+        "400":
+          description: Bad Request - Invalid request format
+          content: {}
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+      x-codegen-request-body-name: data
+  /ai-area/articles/submit-areas/:
+    post:
+      tags:
+      - ai-area
+      description: Weist einem Artikel Gebiete zu
+      operationId: ai-area_articles_submit_areas
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - article_id
+              type: object
+              properties:
+                article_id:
+                  type: integer
+                  description: ID des Artikels
+                area_names:
+                  type: array
+                  description: "Liste der Stadt-Namen (werden automatisch erstellt\
+                    \ wenn nicht vorhanden). Leere Liste [] erlaubt - markiert Artikel\
+                    \ als verarbeitet ohne Areas zuzuweisen."
+                  items:
+                    type: string
+                area_ids:
+                  type: array
+                  description: "Liste der Gebiets-IDs (optional, alternativ zu area_names).\
+                    \ Leere Liste [] erlaubt - markiert Artikel als verarbeitet ohne\
+                    \ Areas zuzuweisen."
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "200":
+          description: Gebiete erfolgreich zugewiesen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  article_id:
+                    type: integer
+                  areas_applied:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+        "400":
+          description: Bad Request - article_id missing or invalid area IDs
+          content: {}
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+        "404":
+          description: Not Found - Article not found
+          content: {}
+      x-codegen-request-body-name: data
+  /ai-tagging/articles/get-untagged-batch/:
+    get:
+      tags:
+      - ai-tagging
+      description: "Holt mehrere ungetaggte Artikel auf einmal (nur letzte 30 Tage).\
+        \ Query Parameter: limit - Anzahl der Artikel (default: 10, max: 100)"
+      operationId: ai-tagging_articles_get-untagged-batch_read
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: "Anzahl der Artikel (default: 10, max: 100)"
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Ungetaggte Artikel gefunden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        abstract:
+                          type: string
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+  /ai-tagging/articles/get-untagged/:
+    get:
+      tags:
+      - ai-tagging
+      description: "Holt einen ungetaggten Artikel zum Tagging (nur letzte 30 Tage).\
+        \ Hinweis: Das 'content' Feld wird nicht zurückgegeben, da bei 99,998% aller\
+        \ Artikel dieses Feld leer ist. Der eigentliche Artikeltext steht im 'abstract'\
+        \ Feld."
+      operationId: ai-tagging_articles_get_untagged
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ungetaggter Artikel gefunden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  abstract:
+                    type: string
+                  current_tags:
+                    type: array
+                    items:
+                      type: integer
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+        "404":
+          description: Not Found - No untagged articles found
+          content: {}
+  /ai-tagging/articles/submit-tags-batch/:
+    post:
+      tags:
+      - ai-tagging
+      description: Speichert die KI-generierten Tags für mehrere Artikel auf einmal
+      operationId: ai-tagging_articles_submit_tags_batch
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - articles
+              type: object
+              properties:
+                articles:
+                  type: array
+                  description: Liste von Artikeln mit ihren Tags
+                  items:
+                    required:
+                    - article_id
+                    - tag_ids
+                    type: object
+                    properties:
+                      article_id:
+                        type: integer
+                        description: ID des zu taggenden Artikels
+                      tag_ids:
+                        type: array
+                        description: Liste der Tag-IDs
+                        items:
+                          type: integer
+        required: true
+      responses:
+        "200":
+          description: Batch-Tagging abgeschlossen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  total:
+                    type: integer
+                  successful:
+                    type: integer
+                  failed:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        article_id:
+                          type: integer
+                        success:
+                          type: boolean
+                        tags_applied:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              name:
+                                type: string
+                        error:
+                          type: string
+        "400":
+          description: Bad Request - Invalid request format
+          content: {}
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+      x-codegen-request-body-name: data
+  /ai-tagging/articles/submit-tags/:
+    post:
+      tags:
+      - ai-tagging
+      description: Speichert die KI-generierten Tags für einen Artikel
+      operationId: ai-tagging_articles_submit_tags
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - article_id
+              - tag_ids
+              type: object
+              properties:
+                article_id:
+                  type: integer
+                  description: ID des zu taggenden Artikels
+                tag_ids:
+                  type: array
+                  description: Liste der Tag-IDs
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "200":
+          description: Tags erfolgreich gespeichert
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  article_id:
+                    type: integer
+                  tags_applied:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+        "400":
+          description: Bad Request - article_id missing or invalid tag IDs
+          content: {}
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+        "404":
+          description: Not Found - Article not found
+          content: {}
+      x-codegen-request-body-name: data
+  /ai-tagging/events/get-untagged-batch/:
+    get:
+      tags:
+      - ai-tagging
+      description: "Holt mehrere ungetaggte Events auf einmal. Query Parameter: limit\
+        \ - Anzahl der Events (default: 10, max: 100). Events von Sources mit type='local'\
+        \ werden ausgeschlossen."
+      operationId: ai-tagging_events_get-untagged-batch_read
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: "Anzahl der Events (default: 10, max: 100)"
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Ungetaggte Events gefunden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        start_date:
+                          type: string
+                          format: date-time
+                        event_location:
+                          type: string
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+  /ai-tagging/events/get-untagged/:
+    get:
+      tags:
+      - ai-tagging
+      description: Holt ein ungetaggtes Event zum Tagging. Events von Sources mit
+        type='local' werden ausgeschlossen.
+      operationId: ai-tagging_events_get_untagged
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ungetaggtes Event gefunden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  content:
+                    type: string
+                  start_date:
+                    type: string
+                    format: date-time
+                  event_location:
+                    type: string
+                  current_tags:
+                    type: array
+                    items:
+                      type: integer
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+        "404":
+          description: Not Found - No untagged events found
+          content: {}
+  /ai-tagging/events/submit-tags-batch/:
+    post:
+      tags:
+      - ai-tagging
+      description: Speichert die KI-generierten Tags für mehrere Events auf einmal
+      operationId: ai-tagging_events_submit_tags_batch
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - events
+              type: object
+              properties:
+                events:
+                  type: array
+                  description: Liste von Events mit ihren Tags
+                  items:
+                    required:
+                    - event_id
+                    - tag_ids
+                    type: object
+                    properties:
+                      event_id:
+                        type: integer
+                        description: ID des zu taggenden Events
+                      tag_ids:
+                        type: array
+                        description: Liste der Tag-IDs
+                        items:
+                          type: integer
+        required: true
+      responses:
+        "200":
+          description: Batch-Tagging abgeschlossen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  total:
+                    type: integer
+                  successful:
+                    type: integer
+                  failed:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        event_id:
+                          type: integer
+                        success:
+                          type: boolean
+                        tags_applied:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              name:
+                                type: string
+                        error:
+                          type: string
+        "400":
+          description: Bad Request - Invalid request format
+          content: {}
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+      x-codegen-request-body-name: data
+  /ai-tagging/events/submit-tags/:
+    post:
+      tags:
+      - ai-tagging
+      description: Speichert die KI-generierten Tags für ein Event
+      operationId: ai-tagging_events_submit_tags
+      parameters:
+      - name: Authorization
+        in: header
+        description: "API Key im Format: ApiKey <your_api_key>"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - event_id
+              - tag_ids
+              type: object
+              properties:
+                event_id:
+                  type: integer
+                  description: ID des zu taggenden Events
+                tag_ids:
+                  type: array
+                  description: Liste der Tag-IDs
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "200":
+          description: Tags erfolgreich gespeichert
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  event_id:
+                    type: integer
+                  tags_applied:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+        "400":
+          description: Bad Request - event_id missing or invalid tag IDs
+          content: {}
+        "401":
+          description: Unauthorized - Invalid authorization format
+          content: {}
+        "403":
+          description: Forbidden - Invalid API key
+          content: {}
+        "404":
+          description: Not Found - Event not found
+          content: {}
+      x-codegen-request-body-name: data
+  /area/:
+    get:
+      tags:
+      - area
+      description: Get locations where molo.news is available
+      operationId: area_list
+      parameters:
+      - name: area
+        in: query
+        description: area
+        schema:
+          type: string
+      - name: longitude
+        in: query
+        description: longitude
+        schema:
+          type: string
+      - name: latitude
+        in: query
+        description: latitude
+        schema:
+          type: string
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListArea'
+        "400":
+          description: Device ID does not exist
+          content: {}
+    post:
+      tags:
+      - area
+      description: Create a new location where molo.news is available
+      operationId: area_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - area
+              - latitude
+              - longitude
+              - zip_code
+              type: object
+              properties:
+                area:
+                  type: string
+                  description: Name of the area
+                longitude:
+                  type: number
+                  description: Longitude of the area
+                latitude:
+                  type: number
+                  description: Latitude of the area
+                zip_code:
+                  type: string
+                  description: Zip code of the area
+        required: true
+      responses:
+        "201":
+          description: Created
+          content: {}
+        "400":
+          description: Bad Request
+          content: {}
+        "401":
+          description: Unauthorized
+          content: {}
+        "409":
+          description: Conflict - Area already exists
+          content: {}
+      x-codegen-request-body-name: data
+  /area/by_distance/:
+    get:
+      tags:
+      - area
+      description: Get locations within a specified distance from a given point
+      operationId: area_by_distance
+      parameters:
+      - name: longitude
+        in: query
+        description: Longitude of the starting point
+        schema:
+          type: string
+      - name: latitude
+        in: query
+        description: Latitude of the starting point
+        schema:
+          type: string
+      - name: distance
+        in: query
+        description: Distance in kilometers
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListArea'
+        "400":
+          description: Bad Request
+          content: {}
+  /area/closest/:
+    get:
+      tags:
+      - area
+      description: Get the closest location where molo.news is available
+      operationId: area_closest
+      parameters:
+      - name: longitude
+        in: query
+        description: longitude
+        schema:
+          type: string
+      - name: latitude
+        in: query
+        description: latitude
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Area'
+        "400":
+          description: Bad Request
+          content: {}
+  /area/{id}/:
+    delete:
+      tags:
+      - area
+      description: Delete a location where molo.news is available
+      operationId: area_delete
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Gebiet.
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Deleted
+          content: {}
+        "400":
+          description: Bad Request
+          content: {}
+  /articles/:
+    get:
+      tags:
+      - articles
+      description: "List published articles.\n\n        If any of the parameters \"\
+        search, tag, organization_all_tags, organization\" is supplied\n         then\
+        \ no articles flagged as \"is_hot\" will be inserted as the first article.\n\
+        \        In addition using one of the parameters \"tag, organization_all_tags,\
+        \ organization\" will supersede stored user settings and filters. \n"
+      operationId: articles_list
+      parameters:
+      - name: organization
+        in: query
+        description: Organization ID(s) - comma separated | defaults to user settings
+        schema:
+          type: string
+      - name: organization_all_tags
+        in: query
+        description: Organization ID(s) - comma separated - not filtered against tags
+          | defaults to user settings
+        schema:
+          type: string
+      - name: tags
+        in: query
+        description: Tag ID(s) - comma separated | defaults to user settings
+        schema:
+          type: string
+      - name: date_start
+        in: query
+        description: ISO 8601 formatted
+        schema:
+          type: string
+      - name: date_end
+        in: query
+        description: ISO 8601 formatted
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Ordering (default is "-date")
+        schema:
+          type: string
+          enum:
+          - date
+          - -date
+      - name: search
+        in: query
+        description: "Search term - searches in title, abstract, content and tags"
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: areas
+        in: query
+        description: List of area IDs - comma separated
+        schema:
+          type: string
+      - name: news
+        in: query
+        description: "Include articles with type \"news\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: official
+        in: query
+        description: "Include articles with type \"official\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: collective
+        in: query
+        description: "Include articles with type \"collective\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    format: uri
+                    nullable: true
+                  previous:
+                    type: string
+                    format: uri
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ArticleList'
+        "400":
+          description: Device ID missing.
+          content: {}
+    post:
+      tags:
+      - articles
+      description: "This methods can be used to create, update, delete and list articles"
+      operationId: articles_create
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                abstract:
+                  type: string
+                content:
+                  type: string
+                link:
+                  type: string
+                published:
+                  type: boolean
+                area:
+                  type: array
+                  items:
+                    type: integer
+                article_tags:
+                  type: array
+                  items:
+                    type: integer
+                date:
+                  type: string
+                  format: date
+        required: true
+      responses:
+        "201":
+          description: Event created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        "400":
+          description: Invalid Request
+          content: {}
+      x-codegen-request-body-name: data
+  /articles/{id}/:
+    get:
+      tags:
+      - articles
+      description: "Retrieve a single article. Optional: X-Device-ID header to determine\
+        \ bookmarked state."
+      operationId: articles_read
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleRetrieveSerializerV4'
+    put:
+      tags:
+      - articles
+      description: Update an article.
+      operationId: articles_update
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                abstract:
+                  type: string
+                content:
+                  type: string
+                link:
+                  type: string
+                published:
+                  type: boolean
+                area:
+                  type: array
+                  items:
+                    type: integer
+                article_tags:
+                  type: array
+                  items:
+                    type: integer
+                date:
+                  type: string
+                  format: date
+        required: true
+      responses:
+        "204":
+          description: No Content
+          content: {}
+        "400":
+          description: Invalid Request
+          content: {}
+      x-codegen-request-body-name: data
+    delete:
+      tags:
+      - articles
+      description: Delete an article
+      operationId: articles_delete
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Deleted
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Article not found
+          content: {}
+  /articles/{id}/picture-upload/:
+    post:
+      tags:
+      - articles
+      operationId: articles_upload_picture
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - picture
+              type: object
+              properties:
+                picture:
+                  type: string
+                  description: The picture file to upload
+                  format: binary
+                image_source:
+                  type: string
+                  description: Source of the image
+        required: true
+      responses:
+        "201":
+          description: Picture uploaded successfully
+          content:
+            application/json:
+              example:
+                message: Picture uploaded successfully
+                article_id: "123"
+                image_url: https://example.com/media/appuploads/your-uploaded-image.jpg
+        "400":
+          description: "Invalid request - missing picture, invalid file format, or\
+            \ missing article ID"
+          content:
+            application/json:
+              example:
+                message: No picture file present
+        "404":
+          description: Article does not exist
+          content:
+            application/json:
+              example:
+                message: Article does not exist
+        "500":
+          description: Error occurred while saving the file
+          content:
+            application/json:
+              example:
+                message: Error occurred while saving the file
+  /articles/{id}/similar/:
+    get:
+      tags:
+      - articles
+      description: "This methods can be used to create, update, delete and list articles"
+      operationId: articles_similar
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedArticleRetrieve'
+        "400":
+          description: Device ID missing.
+          content: {}
+        "404":
+          description: No such article.
+          content: {}
+  /categories/:
+    get:
+      tags:
+      - categories
+      operationId: categories_list
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        "400":
+          description: Device ID missing.
+          content: {}
+  /contact/feedback/:
+    post:
+      tags:
+      - contact
+      description: Send feedback.
+      operationId: contact_feedback_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: contact_type
+        in: query
+        description: Reason for contact
+        required: true
+        schema:
+          type: string
+          enum:
+          - app_feedback
+          - info_news_feedback
+      - name: email
+        in: query
+        description: Sender email address
+        required: true
+        schema:
+          type: string
+      - name: content
+        in: query
+        description: content
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Feedback sent
+          content: {}
+        "400":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+  /contact/participate/:
+    post:
+      tags:
+      - contact
+      description: Send participation request.
+      operationId: contact_participate_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Sender email address
+        required: true
+        schema:
+          type: string
+      - name: content
+        in: query
+        description: content
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request sent
+          content: {}
+        "400":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+  /events/:
+    get:
+      tags:
+      - events
+      description: |+
+        List published events.
+
+      operationId: events_list
+      parameters:
+      - name: ordering
+        in: query
+        description: Ordering (default is "event_date")
+        schema:
+          type: string
+          enum:
+          - event_date
+          - -event_date
+      - name: search
+        in: query
+        description: "Search term - searches in title, abstract, content and tags"
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: date_start
+        in: query
+        description: ISO 8601 formatted - YYYY-MM-DD
+        schema:
+          type: string
+      - name: date_end
+        in: query
+        description: ISO 8601 formatted- YYYY-MM-DD
+        schema:
+          type: string
+      - name: tags
+        in: query
+        description: Tag ID(s) - comma separated
+        schema:
+          type: string
+      - name: subtags
+        in: query
+        description: Tag ID(s) - comma separated
+        schema:
+          type: string
+      - name: areas
+        in: query
+        description: List of area IDs - comma separated
+        schema:
+          type: string
+      - name: town
+        in: query
+        description: Town
+        schema:
+          type: string
+      - name: organization
+        in: query
+        description: "Organization ID(s) - comma separated | defaults to user settings,\
+          \ if supplied min date of events will be current date"
+        schema:
+          type: string
+      - name: news
+        in: query
+        description: "Include events with type \"news\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: official
+        in: query
+        description: "Include events with type \"official\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: collective
+        in: query
+        description: "Include events with type \"collective\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventRetrieve'
+        "400":
+          description: Device ID missing.
+          content: {}
+    post:
+      tags:
+      - events
+      description: Create a new Event
+      operationId: events_create
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - content
+              - event_tags
+              - title
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                link:
+                  type: string
+                ticket_url:
+                  type: string
+                street:
+                  type: string
+                town:
+                  type: string
+                zip_code:
+                  type: string
+                image_url:
+                  type: string
+                event_location:
+                  type: string
+                longitude:
+                  type: number
+                latitude:
+                  type: number
+                image_source:
+                  type: string
+                published:
+                  type: boolean
+                occurrences:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      event_start_date:
+                        type: string
+                        format: date-time
+                      event_end_date:
+                        type: string
+                        format: date-time
+                event_tags:
+                  type: array
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "201":
+          description: Event created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        "400":
+          description: Bad Request
+          content: {}
+        "409":
+          description: Event already exists (duplicate)
+          content: {}
+      x-codegen-request-body-name: data
+  /events/{id}/:
+    get:
+      tags:
+      - events
+      description: "Retrieve a single article. Optional: X-Device-ID header to determine\
+        \ bookmarked state."
+      operationId: events_read
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+    put:
+      tags:
+      - events
+      description: Update an event
+      operationId: events_update
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                link:
+                  type: string
+                ticket_url:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                street:
+                  type: string
+                town:
+                  type: string
+                zip_code:
+                  type: string
+                image_url:
+                  type: string
+                event_location:
+                  type: string
+                longitude:
+                  type: number
+                latitude:
+                  type: number
+                image_source:
+                  type: string
+                published:
+                  type: boolean
+                occurrences:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      event_start_date:
+                        type: string
+                        format: date-time
+                      event_end_date:
+                        type: string
+                        format: date-time
+                area:
+                  type: array
+                  items:
+                    type: integer
+                event_tags:
+                  type: array
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "204":
+          description: Event updated
+          content: {}
+        "400":
+          description: Bad Request
+          content: {}
+        "404":
+          description: Event not found
+          content: {}
+      x-codegen-request-body-name: data
+    delete:
+      tags:
+      - events
+      description: Delete an Event
+      operationId: events_delete
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Deleted
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Event not found
+          content: {}
+  /events/{id}/picture-upload/:
+    post:
+      tags:
+      - events
+      operationId: events_upload_picture
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                picture:
+                  type: string
+                  description: The picture file to upload
+                  format: binary
+                image_source:
+                  type: string
+                  description: Source of the image
+        required: true
+      responses:
+        "201":
+          description: Picture uploaded successfully
+          content:
+            application/json:
+              example:
+                message: Picture uploaded successfully
+                event_id: "123"
+                image_url: https://example.com/media/appuploads/your-uploaded-image.jpg
+        "400":
+          description: "Invalid request - missing picture, invalid file format, or\
+            \ missing event ID"
+          content:
+            application/json:
+              example:
+                message: No picture file present
+        "404":
+          description: Event does not exist
+          content:
+            application/json:
+              example:
+                message: Event does not exist
+        "500":
+          description: Error occurred while saving the file
+          content:
+            application/json:
+              example:
+                message: Error occurred while saving the file
+  /events/{id}/retrieve/:
+    get:
+      tags:
+      - events
+      description: Retrieves a single event by its ID.
+      operationId: events_retrieve_event
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventRetrieve'
+        "400":
+          description: Device ID missing.
+          content: {}
+        "404":
+          description: No such event.
+          content: {}
+  /events/{id}/similar/:
+    get:
+      tags:
+      - events
+      summary: Returns a list of similar events.
+      description: |-
+        This method handles GET requests to retrieve a list of events that are similar to a specific event identified by its primary key (pk).
+
+        The method uses Swagger to document the API, including:
+        - A required header parameter for the device ID (X-Device-ID).
+        - Optional query parameters for pagination (limit and offset).
+        - Possible response schemas and messages for various HTTP status codes (200, 400, 404).
+      operationId: events_similar
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventRetrieve'
+        "400":
+          description: Device ID missing.
+          content: {}
+        "404":
+          description: No such event.
+          content: {}
+  /general/appurls/:
+    get:
+      tags:
+      - general
+      description: Get a list of URLs used in the side menu of the app
+      operationId: general_appurls_list
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppUrl'
+        "400":
+          description: Device ID does not exist
+          content: {}
+  /general/flag-article/:
+    post:
+      tags:
+      - general
+      operationId: general_flag_article
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_id:
+                  type: integer
+        required: true
+      responses:
+        "204":
+          description: Flagged article
+          content: {}
+        "400":
+          description: Device ID missing.
+          content: {}
+        "404":
+          description: No such article.
+          content: {}
+      x-codegen-request-body-name: data
+  /general/flag-event/:
+    post:
+      tags:
+      - general
+      operationId: general_flag_event
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_id:
+                  type: integer
+        required: true
+      responses:
+        "204":
+          description: Event flagged.
+          content: {}
+        "400":
+          description: Device ID missing.
+          content: {}
+        "404":
+          description: No such event.
+          content: {}
+      x-codegen-request-body-name: data
+  /import/delete-events-by-source/:
+    post:
+      tags:
+      - import
+      description: Delete all events by a specific source ID. Requires Bearer token
+        authentication.
+      operationId: import_delete_events_by_source
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceDelete'
+        required: true
+      responses:
+        "200":
+          description: Events deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  source_id:
+                    type: integer
+                  command:
+                    type: string
+                  output:
+                    type: string
+                  return_code:
+                    type: integer
+        "400":
+          description: Bad request - invalid source_id
+          content: {}
+        "401":
+          description: Unauthorized - invalid or missing token
+          content: {}
+        "500":
+          description: Server error during deletion
+          content: {}
+      x-codegen-request-body-name: data
+  /import/import-file/:
+    post:
+      tags:
+      - import
+      description: Import a previously uploaded file into the database asynchronously.
+        The import runs in the background and the endpoint returns immediately with
+        202 Accepted. Check the log file for import progress. Requires Bearer token
+        authentication.
+      operationId: import_import_file
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileImport'
+        required: true
+      responses:
+        "202":
+          description: Import started successfully in background
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success message
+                  status:
+                    type: string
+                    description: Import status (processing)
+                  filename:
+                    type: string
+                    description: Name of imported file
+                  source_id:
+                    type: integer
+                    description: Source ID used for import
+                  command:
+                    type: string
+                    description: Import command executed
+                  log_file:
+                    type: string
+                    description: Path to log file for monitoring import progress
+                  process_id:
+                    type: integer
+                    description: Process ID of background import
+        "400":
+          description: Bad request - invalid filename or missing data
+          content: {}
+        "401":
+          description: Unauthorized - invalid or missing token
+          content: {}
+        "404":
+          description: File not found
+          content: {}
+        "500":
+          description: Server error during import startup
+          content: {}
+      x-codegen-request-body-name: data
+  /import/status/:
+    get:
+      tags:
+      - import
+      description: Check the status of an import process by reading its log file.
+        Requires Bearer token authentication.
+      operationId: import_check_status
+      parameters:
+      - name: filename
+        in: query
+        description: Filename to check import status for
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer token for authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Import status retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filename:
+                    type: string
+                  log_file:
+                    type: string
+                  log_exists:
+                    type: boolean
+                  log_content:
+                    type: string
+                    description: Last 50 lines of log
+        "400":
+          description: Bad request - missing filename
+          content: {}
+        "401":
+          description: Unauthorized - invalid or missing token
+          content: {}
+        "404":
+          description: Log file not found
+          content: {}
+  /import/upload-file/:
+    post:
+      tags:
+      - import
+      description: Upload a file to the import directory. Requires Bearer token authentication.
+      operationId: import_upload-file_create
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token for authentication
+        required: true
+        schema:
+          type: string
+          format: Bearer <token>
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  description: File to upload
+                  format: binary
+        required: true
+      responses:
+        "200":
+          description: File uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  filename:
+                    type: string
+                  file_path:
+                    type: string
+                  file_size:
+                    type: integer
+        "400":
+          description: Bad request - invalid file or missing data
+          content: {}
+        "401":
+          description: Unauthorized - invalid or missing token
+          content: {}
+        "500":
+          description: Server error during file upload
+          content: {}
+  /organization/{id}/image:
+    get:
+      tags:
+      - organization
+      description: Retrieve organization image file directly
+      operationId: organization_retrieve_image
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Organization image file
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: Organization not found or no image available
+          content: {}
+  /organizations/:
+    get:
+      tags:
+      - organizations
+      operationId: organizations_list
+      parameters:
+      - name: type
+        in: query
+        description: type
+        schema:
+          type: string
+          enum:
+          - news
+          - official
+          - collective
+          - all
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+  /organizations/{id}/:
+    get:
+      tags:
+      - organizations
+      operationId: organizations_read
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this organization.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+  /redirect/:
+    get:
+      tags:
+      - redirect
+      operationId: redirect_list
+      responses:
+        "200":
+          description: ""
+          content: {}
+  /sources/:
+    get:
+      tags:
+      - sources
+      operationId: sources_list
+      parameters:
+      - name: organization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Source'
+  /sources/{id}/:
+    get:
+      tags:
+      - sources
+      operationId: sources_read
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Quelle.
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+  /tags/get-all-article-tags/:
+    get:
+      tags:
+      - tags
+      operationId: tags_get_all_tags
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArticleTagsSerializerV4'
+        "400":
+          description: Device ID missing.
+          content: {}
+  /tags/get-all-event-tags/:
+    get:
+      tags:
+      - tags
+      operationId: tags_get_all_event_tags
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventTags'
+        "400":
+          description: Device ID missing.
+          content: {}
+  /tags/get-categories-full/:
+    get:
+      tags:
+      - tags
+      operationId: tags_get_categories_full
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagCategory'
+        "400":
+          description: Error retrieving categories.
+          content: {}
+  /tags/get-categories/:
+    get:
+      tags:
+      - tags
+      operationId: tags_get_categories
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagCategoryShort'
+        "400":
+          description: Error retrieving categories.
+          content: {}
+  /token/:
+    post:
+      tags:
+      - token
+      description: Obtain a JWT token
+      operationId: token_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        "400":
+          description: Invalid credentials
+          content: {}
+      x-codegen-request-body-name: data
+  /token/refresh/:
+    post:
+      tags:
+      - token
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      operationId: token_refresh_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+      x-codegen-request-body-name: data
+  /token/verify/:
+    post:
+      tags:
+      - token
+      description: Verify a JWT token
+      operationId: token_verify_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+        required: true
+      responses:
+        "201":
+          description: Token verified successfully
+          content: {}
+        "400":
+          description: Invalid token
+          content: {}
+      x-codegen-request-body-name: data
+  /users/:
+    post:
+      tags:
+      - users
+      operationId: users_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                display_name:
+                  type: string
+                street:
+                  type: string
+                zip:
+                  type: string
+                town:
+                  type: string
+                area:
+                  type: integer
+        required: true
+      responses:
+        "204":
+          description: User created successfully
+          content: {}
+        "400":
+          description: Invalid data provided
+          content: {}
+      x-codegen-request-body-name: data
+  /users/activate/:
+    get:
+      tags:
+      - users
+      description: Activate a user
+      operationId: users_activate_user
+      parameters:
+      - name: token
+        in: query
+        description: Activation token
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: User activated successfully
+          content: {}
+        "400":
+          description: Invalid token provided
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+  /users/add-organization-to-user/:
+    post:
+      tags:
+      - users
+      description: Adds an organization to the user's organization list
+      operationId: users_add_organization
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - organization_id
+              type: object
+              properties:
+                organization_id:
+                  type: integer
+        required: true
+      responses:
+        "204":
+          description: added organization
+          content: {}
+        "400":
+          description: Missing or invalid parameters
+          content: {}
+      x-codegen-request-body-name: data
+  /users/article-archive/:
+    get:
+      tags:
+      - users
+      description: List archived articles
+      operationId: users_article-archive_list
+      parameters:
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedArticleBookmarkedArchived'
+        "400":
+          description: Invalid Device ID
+          content: {}
+  /users/article-archive/{id}/:
+    put:
+      tags:
+      - users
+      description: Add article to archive
+      operationId: users_article-archive_update
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: No data is required in the request body
+        required: true
+      responses:
+        "201":
+          description: Added to archive
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Article not found
+          content: {}
+      x-codegen-request-body-name: data
+    delete:
+      tags:
+      - users
+      description: Remove article from archive
+      operationId: users_article-archive_delete
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Removed from archive
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Article not found
+          content: {}
+  /users/article-bookmarks/:
+    get:
+      tags:
+      - users
+      description: List bookmarked articles
+      operationId: users_article-bookmarks_list
+      parameters:
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedArticleList'
+        "400":
+          description: Invalid Device ID
+          content: {}
+  /users/article-bookmarks/{id}/:
+    put:
+      tags:
+      - users
+      description: Add article to bookmarks
+      operationId: users_article-bookmarks_update
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          description: Added to bookmarks
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Article not found
+          content: {}
+    delete:
+      tags:
+      - users
+      description: Remove article from bookmarks
+      operationId: users_article-bookmarks_delete
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Artikel.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Removed from bookmarks
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Article not found
+          content: {}
+  /users/article-tags/:
+    get:
+      tags:
+      - users
+      description: Get selected tags
+      operationId: users_article-tags_list
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagList'
+        "400":
+          description: Device ID is missing
+          content: {}
+    post:
+      tags:
+      - users
+      description: Set selected tags
+      operationId: users_article-tags_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagList'
+        required: true
+      responses:
+        "200":
+          description: User Settings saved
+          content: {}
+        "400":
+          description: Device ID is missing
+          content: {}
+      x-codegen-request-body-name: data
+  /users/articles/:
+    get:
+      tags:
+      - users
+      description: List articles for a specific user.
+      operationId: users_list_user_articles
+      parameters:
+      - name: organization
+        in: query
+        description: Organization ID(s) - comma separated | defaults to user settings
+        schema:
+          type: string
+      - name: organization_all_tags
+        in: query
+        description: Organization ID(s) - comma separated - not filtered against tags
+          | defaults to user settings
+        schema:
+          type: string
+      - name: tags
+        in: query
+        description: Tag ID(s) - comma separated | defaults to user settings
+        schema:
+          type: string
+      - name: date_start
+        in: query
+        description: ISO 8601 formatted
+        schema:
+          type: string
+      - name: date_end
+        in: query
+        description: ISO 8601 formatted
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedArticleRetrieveSerializerUser'
+        "400":
+          description: Device ID missing.
+          content: {}
+        "401":
+          description: Unauthorized
+          content: {}
+  /users/change-password/:
+    post:
+      tags:
+      - users
+      description: Change user password
+      operationId: users_change_password
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_password:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: Password changed successfully
+          content: {}
+        "400":
+          description: Invalid data provided
+          content: {}
+        "401":
+          description: Unauthorized
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+      x-codegen-request-body-name: data
+  /users/delete/:
+    delete:
+      tags:
+      - users
+      description: Delete an admin user
+      operationId: users_delete_user
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: User deleted successfully
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+  /users/device/:
+    get:
+      tags:
+      - users
+      description: Is Device known?
+      operationId: users_device_list
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Device ID is known
+          content: {}
+        "400":
+          description: Device ID does not exist
+          content: {}
+  /users/event-archive/:
+    get:
+      tags:
+      - users
+      description: List Archived events
+      operationId: users_event-archive_list
+      parameters:
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventRetrieve'
+        "400":
+          description: Invalid Device ID
+          content: {}
+  /users/event-archive/{id}/:
+    put:
+      tags:
+      - users
+      description: Add events to archive
+      operationId: users_event-archive_update
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: No data is required in the request body
+        required: true
+      responses:
+        "204":
+          description: Added to archive
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Event not found
+          content: {}
+      x-codegen-request-body-name: data
+    delete:
+      tags:
+      - users
+      description: Remove event from archive
+      operationId: users_event-archive_delete
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Removed from archive
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Event not found
+          content: {}
+  /users/event-bookmarks/:
+    get:
+      tags:
+      - users
+      description: List bookmarked events
+      operationId: users_event-bookmarks_list
+      parameters:
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventRetrieve'
+        "400":
+          description: Invalid Device ID
+          content: {}
+    post:
+      tags:
+      - users
+      description: Add event to bookmarks
+      operationId: users_event-bookmarks_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventList'
+        required: true
+      responses:
+        "201":
+          description: Added to bookmarks
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Event not found
+          content: {}
+      x-codegen-request-body-name: data
+  /users/event-bookmarks/{id}/:
+    put:
+      tags:
+      - users
+      description: Add events to bookmarks
+      operationId: users_event-bookmarks_update
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          description: Added to bookmarks
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Event not found
+          content: {}
+    delete:
+      tags:
+      - users
+      description: Remove event from bookmarks
+      operationId: users_event-bookmarks_delete
+      parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Ereignis.
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Removed from bookmarks
+          content: {}
+        "400":
+          description: Invalid Device ID
+          content: {}
+        "404":
+          description: Event not found
+          content: {}
+  /users/event-tags/:
+    get:
+      tags:
+      - users
+      description: Get selected tags
+      operationId: users_event-tags_list
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventTagListGet'
+        "400":
+          description: Device ID is missing
+          content: {}
+    post:
+      tags:
+      - users
+      description: Set selected event tags
+      operationId: users_event-tags_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventTagList'
+        required: true
+      responses:
+        "200":
+          description: User Settings saved
+          content: {}
+        "400":
+          description: Device ID is missing
+          content: {}
+      x-codegen-request-body-name: data
+  /users/events/:
+    get:
+      tags:
+      - users
+      description: List events for a specific user.
+      operationId: users_list_user_events
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventRetrieve'
+        "400":
+          description: Bad Request
+          content: {}
+        "401":
+          description: Unauthorized
+          content: {}
+        "404":
+          description: No events found for the user
+          content: {}
+  /users/get-user-details/:
+    get:
+      tags:
+      - users
+      description: Get user data
+      operationId: users_get_user_details
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGet'
+        "401":
+          description: Unauthorized
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+  /users/list-tag-preferences-articles/:
+    get:
+      tags:
+      - users
+      description: Gibt alle Tag-Kategorien mit allen Tags vom Typ "article" zurück
+      operationId: users_list_tag_preferences_articles
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagPreferenceArticleCategory'
+        "400":
+          description: Device ID missing.
+          content: {}
+  /users/list-tag-preferences-events/:
+    get:
+      tags:
+      - users
+      description: Gibt alle Tag-Kategorien mit allen Tags vom Typ "event" zurück
+      operationId: users_list_tag_preferences_events
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: date_start
+        in: query
+        description: Startdatum im Format YYYY-MM-DD
+        schema:
+          type: string
+      - name: date_end
+        in: query
+        description: Enddatum im Format YYYY-MM-DD
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "A search term. Searches in title, content and tag name"
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagPreferenceCategory'
+        "400":
+          description: Device ID missing.
+          content: {}
+  /users/list-tag-preferences/:
+    get:
+      tags:
+      - users
+      description: |-
+        Gibt alle Tag-Kategorien mit allen Tags zurück,
+        markiert die vom User ausgewählten Tags als selected
+        und liefert einen Counter, wie viele zukünftige Events pro Kategorie für den Nutzer passen.
+      operationId: users_list_tag_preferences
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: date_start
+        in: query
+        description: Startdatum im Format YYYY-MM-DD
+        schema:
+          type: string
+      - name: date_end
+        in: query
+        description: Enddatum im Format YYYY-MM-DD
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "A search term. Searches in title, content and tag name"
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagPreferenceCategory'
+        "400":
+          description: Device ID missing.
+          content: {}
+  /users/list_areas_by_user/:
+    get:
+      tags:
+      - users
+      description: "Gibt alle Areas zurück, die dem AppUser (über Device ID) zugeordnet\
+        \ sind."
+      operationId: users_list_areas_by_user
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Area'
+        "400":
+          description: Bad Request
+          content: {}
+  /users/list_articles/:
+    get:
+      tags:
+      - users
+      description: "List published articles based on user's areas and tags. Optional:\
+        \ ignore_user_selection=True um die Tag-Auswahl des Users zu ignorieren."
+      operationId: users_list_articles
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "Search term - searches in title, abstract, content and tags"
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ignore_user_selection
+        in: query
+        description: Ignore user tag and organization selection
+        schema:
+          type: boolean
+          default: false
+      - name: news
+        in: query
+        description: "Include articles with type \"news\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: official
+        in: query
+        description: "Include articles with type \"official\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: collective
+        in: query
+        description: "Include articles with type \"collective\", defaults to true"
+        schema:
+          type: boolean
+          default: true
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    format: uri
+                    nullable: true
+                  previous:
+                    type: string
+                    format: uri
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ArticleRetrieveSerializerV4'
+  /users/list_articles_by_organization/:
+    get:
+      tags:
+      - users
+      description: List all articles published by a specific organization (by organization
+        id).
+      operationId: users_list_articles_by_organization
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: organization_id
+        in: query
+        description: ID der Organisation (Pflicht)
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedArticleRetrieve'
+  /users/list_events_by_organization/:
+    get:
+      tags:
+      - users
+      description: |
+        Liefert alle veröffentlichten Events einer Organisation.
+      operationId: users_list_events_by_organization
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Ergebnis-Limit (optional)
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Result-Offset (optional)
+        schema:
+          type: integer
+      - name: organization_id
+        in: query
+        description: ID der Organisation (Pflicht)
+        required: true
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventRetrieveSerializerShort'
+        "400":
+          description: Ungültiger oder fehlender Parameter
+          content: {}
+        "404":
+          description: Organisation nicht gefunden / keine Events
+          content: {}
+  /users/list_future_events_by_category/:
+    get:
+      tags:
+      - users
+      description: Liefert alle zukünftigen Events
+      operationId: users_list_future_events_by_category
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: category_id
+        in: query
+        description: ID der Kategorie
+        required: true
+        schema:
+          type: integer
+      - name: organization
+        in: query
+        description: Organization ID(s) - comma separated
+        schema:
+          type: string
+      - name: town
+        in: query
+        description: Town
+        schema:
+          type: string
+      - name: subtags
+        in: query
+        description: Subtag ID(s) - comma separated
+        schema:
+          type: string
+      - name: date_start
+        in: query
+        description: start date (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)
+        schema:
+          type: string
+      - name: date_end
+        in: query
+        description: end date (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventRetrieveSerializerShort'
+        "400":
+          description: Device ID oder category_id fehlt
+          content: {}
+        "404":
+          description: Kategorie oder AppUser nicht gefunden
+          content: {}
+  /users/location/:
+    get:
+      tags:
+      - users
+      description: Get user location
+      operationId: users_location_list
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLocation'
+        "400":
+          description: Device ID does not exist
+          content: {}
+    post:
+      tags:
+      - users
+      description: Set user location
+      operationId: users_location_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLocation'
+        required: true
+      responses:
+        "200":
+          description: User Settings saved
+          content: {}
+        "400":
+          description: Device ID is missing
+          content: {}
+      x-codegen-request-body-name: data
+  /users/organizations/:
+    post:
+      tags:
+      - users
+      description: Set selected organizations
+      operationId: users_organizations_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: organization_type
+        in: query
+        description: The type of an organization
+        schema:
+          type: string
+          enum:
+          - news
+          - official
+          - collective
+          - all
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserOrganizations'
+        required: true
+      responses:
+        "204":
+          description: User Settings saved
+          content: {}
+        "400":
+          description: Device ID is missing
+          content: {}
+      x-codegen-request-body-name: data
+  /users/picture-upload/:
+    post:
+      tags:
+      - users
+      operationId: users_upload_picture
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT token
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                picture:
+                  type: string
+                  description: The picture file to upload
+                  format: binary
+                image_source:
+                  type: string
+                  description: Source of the image
+        required: true
+      responses:
+        "201":
+          description: Picture uploaded successfully
+          content:
+            application/json:
+              example:
+                message: Picture uploaded successfully
+                event_id: "123"
+                image_url: https://example.com/media/appuploads/your-uploaded-image.jpg
+        "400":
+          description: "Invalid request - missing picture, invalid file format, or\
+            \ missing event ID"
+          content:
+            application/json:
+              example:
+                message: No picture file present
+        "404":
+          description: Event does not exist
+          content:
+            application/json:
+              example:
+                message: Event does not exist
+        "500":
+          description: Error occurred while saving the file
+          content:
+            application/json:
+              example:
+                message: Error occurred while saving the file
+  /users/push/:
+    get:
+      tags:
+      - users
+      description: Get user push settings
+      operationId: users_push_list
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPush'
+        "400":
+          description: Device ID does not exist
+          content: {}
+    post:
+      tags:
+      - users
+      description: Set user push settings
+      operationId: users_push_create
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPush'
+        required: true
+      responses:
+        "200":
+          description: User Settings saved
+          content: {}
+        "400":
+          description: Device ID is missing
+          content: {}
+      x-codegen-request-body-name: data
+  /users/redirect-user-into-app/:
+    get:
+      tags:
+      - users
+      description: Redirect user into app and reset password with token
+      operationId: users_redirect_user_into_app
+      parameters:
+      - name: token
+        in: query
+        description: Reset token
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+        "302":
+          description: Redirect to app
+          content: {}
+        "400":
+          description: Token missing
+          content: {}
+  /users/remove-organization-from-user/:
+    post:
+      tags:
+      - users
+      description: Removes an organization from the user's organization list
+      operationId: users_remove_organization
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - organization_id
+              type: object
+              properties:
+                organization_id:
+                  type: integer
+        required: true
+      responses:
+        "204":
+          description: removed organization
+          content: {}
+        "400":
+          description: Missing or invalid parameters
+          content: {}
+      x-codegen-request-body-name: data
+  /users/request-password-reset/:
+    post:
+      tags:
+      - users
+      description: Reset password
+      operationId: users_request_password_reset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+        required: true
+      responses:
+        "204":
+          description: No Content
+          content: {}
+        "404":
+          description: Email not found
+          content: {}
+      x-codegen-request-body-name: data
+  /users/reset-password-with-token/:
+    post:
+      tags:
+      - users
+      description: Change user password based on reset token
+      operationId: users_reset_password_with_token
+      parameters:
+      - name: Authorization
+        in: header
+        description: Reset token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_password:
+                  type: string
+        required: true
+      responses:
+        "204":
+          description: Password reset successful
+          content: {}
+        "400":
+          description: Invalid data provided
+          content: {}
+        "401":
+          description: Unauthorized
+          content: {}
+      x-codegen-request-body-name: data
+  /users/set-tag-preferences-articles/:
+    post:
+      tags:
+      - users
+      description: |-
+        Speichert ausgewählte Tags vom Typ 'article' als Präferenz des Users.
+        Andere Tag-Typen werden ignoriert.
+      operationId: users_set_tag_preferences_articles
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - tag_ids
+              type: object
+              properties:
+                tag_ids:
+                  type: array
+                  description: Liste der gewählten Tag-IDs (nur Typ 'article')
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "204":
+          description: Tags gespeichert
+          content: {}
+        "400":
+          description: Fehler
+          content: {}
+      x-codegen-request-body-name: data
+  /users/set-tag-preferences-events/:
+    post:
+      tags:
+      - users
+      description: |-
+        Speichert ausgewählte Tags vom Typ 'event' als Präferenz des Users.
+        Andere Tag-Typen werden ignoriert.
+      operationId: users_set_tag_preferences_events
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - tag_ids
+              type: object
+              properties:
+                tag_ids:
+                  type: array
+                  description: Liste der gewählten Tag-IDs (nur Typ 'event')
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "204":
+          description: Tags gespeichert
+          content: {}
+        "400":
+          description: Fehler
+          content: {}
+      x-codegen-request-body-name: data
+  /users/set-tag-preferences/:
+    post:
+      tags:
+      - users
+      description: |-
+        Setzt die angegebenen Tag-IDs auf "selected" (alle anderen auf "deselected").
+        Ungültige IDs werden ignoriert.
+      operationId: users_set_tag_preferences
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - tag_ids
+              type: object
+              properties:
+                tag_ids:
+                  type: array
+                  description: Liste der gewählten Tag-IDs
+                  items:
+                    type: integer
+        required: true
+      responses:
+        "204":
+          description: Tags gespeichert
+          content: {}
+        "400":
+          description: Fehler
+          content: {}
+      x-codegen-request-body-name: data
+  /users/set_areas_by_location/:
+    post:
+      tags:
+      - users
+      description: "Setzt für einen Nutzer die Areas, die im Umkreis der angegebenen\
+        \ Koordinaten liegen."
+      operationId: users_set_areas_by_location
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      - name: longitude
+        in: query
+        description: User longitude
+        schema:
+          type: string
+      - name: latitude
+        in: query
+        description: User latitude
+        schema:
+          type: string
+      - name: distance
+        in: query
+        description: "Radius in km (optional, default: 50)"
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Areas gesetzt
+          content: {}
+        "400":
+          description: Bad Request
+          content: {}
+  /users/summary/:
+    get:
+      tags:
+      - users
+      description: Get a summary of selected organizations and tags
+      operationId: users_summary_list
+      parameters:
+      - name: X-Device-ID
+        in: header
+        description: Device ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Summary'
+        "400":
+          description: Device ID is missing
+          content: {}
+  /users/update-user/:
+    put:
+      tags:
+      - users
+      description: Update a molo user
+      operationId: users_update_user
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                homepage:
+                  type: string
+                area:
+                  type: integer
+                display_name:
+                  type: string
+                description:
+                  type: string
+                street:
+                  type: string
+                zip:
+                  type: string
+                town:
+                  type: string
+        required: true
+      responses:
+        "204":
+          description: User updated successfully
+          content: {}
+        "400":
+          description: Invalid data provided
+          content: {}
+        "401":
+          description: Unauthorized
+          content: {}
+      x-codegen-request-body-name: data
+components:
+  schemas:
+    TagSerializerId:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+    Area:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+        longitude:
+          title: Longitude
+          type: string
+          format: decimal
+          nullable: true
+        latitude:
+          title: Latitude
+          type: string
+          format: decimal
+          nullable: true
+    ListArea:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Area'
+    ArticleTagsSerializerV4:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 30
+          minLength: 1
+          type: string
+        color:
+          title: Color
+          maxLength: 10
+          type: string
+        selected:
+          title: Selected
+          type: boolean
+          readOnly: true
+    ArticleList:
+      required:
+      - area
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        title:
+          title: Titel
+          maxLength: 350
+          minLength: 1
+          type: string
+        abstract:
+          title: Abstrakt
+          type: string
+          nullable: true
+        date:
+          title: Date
+          type: string
+          description: |2
+
+            This method returns the date of the article in ISO format.
+            It removes the microseconds from the date before converting it to ISO format.
+          format: date-time
+          readOnly: true
+        image_url:
+          title: Image url
+          type: string
+          readOnly: true
+        area:
+          uniqueItems: true
+          type: array
+          items:
+            title: Gebiet
+            type: integer
+        address:
+          title: Adresse
+          maxLength: 300
+          type: string
+        link:
+          title: Link
+          type: string
+          readOnly: true
+        is_hot:
+          title: Ist aktuell
+          type: boolean
+        tags:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/ArticleTagsSerializerV4'
+        organization:
+          title: Organization
+          type: integer
+          description: |2
+
+            This method returns the ID of the organization that the article's source belongs to.
+          readOnly: true
+        organization_type:
+          title: Organization type
+          type: string
+          readOnly: true
+        organization_name:
+          title: Organization name
+          type: string
+          readOnly: true
+        organization_image:
+          title: Organization image
+          type: string
+          readOnly: true
+        image_source:
+          title: Bildquelle
+          maxLength: 600
+          type: string
+          nullable: true
+        request_count:
+          title: Anzahl der Anfragen
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        archived:
+          title: Archived
+          type: boolean
+          description: |2
+
+            This method returns whether the article is archived.
+            It gets the 'archived' attribute from the instance and converts it to a boolean.
+          readOnly: true
+        bookmarked:
+          title: Bookmarked
+          type: boolean
+          description: Return True if the article is bookmarked for the current app_user.
+          readOnly: true
+        bookmarked_count:
+          title: Bookmarked count
+          type: integer
+          readOnly: true
+        source:
+          title: Source
+          type: integer
+          readOnly: true
+    AreaIdName:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+    ArticleRetrieveSerializerV4:
+      required:
+      - area
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        title:
+          title: Titel
+          maxLength: 350
+          minLength: 1
+          type: string
+        abstract:
+          title: Abstrakt
+          type: string
+          nullable: true
+        date:
+          title: Date
+          type: string
+          description: |2
+
+            This method returns the date of the article in ISO format.
+            It removes the microseconds from the date before converting it to ISO format.
+          format: date-time
+          readOnly: true
+        image_url:
+          title: Image url
+          type: string
+          readOnly: true
+        area:
+          uniqueItems: true
+          type: array
+          items:
+            title: Gebiet
+            type: integer
+        address:
+          title: Adresse
+          maxLength: 300
+          type: string
+        link:
+          title: Link
+          type: string
+          readOnly: true
+        is_hot:
+          title: Ist aktuell
+          type: boolean
+        tags:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/ArticleTagsSerializerV4'
+        organization:
+          title: Organization
+          type: integer
+          description: |2
+
+            This method returns the ID of the organization that the article's source belongs to.
+          readOnly: true
+        organization_type:
+          title: Organization type
+          type: string
+          readOnly: true
+        organization_name:
+          title: Organization name
+          type: string
+          readOnly: true
+        organization_image:
+          title: Organization image
+          type: string
+          readOnly: true
+        image_source:
+          title: Bildquelle
+          maxLength: 600
+          type: string
+          nullable: true
+        source:
+          title: Source
+          type: integer
+          readOnly: true
+        content:
+          title: Inhalt
+          type: string
+        archived:
+          title: Archived
+          type: boolean
+          description: |2
+
+            This method returns whether the article is archived.
+            It gets the 'archived' attribute from the instance and converts it to a boolean.
+          readOnly: true
+        bookmarked:
+          title: Bookmarked
+          type: boolean
+          description: Return True if the article is bookmarked for the current app_user.
+          readOnly: true
+        areas:
+          type: array
+          description: |2
+
+            This method returns all areas of the article.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/AreaIdName'
+        published:
+          title: Veröffentlicht
+          type: boolean
+    PaginatedArticleRetrieve:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        next:
+          title: Next
+          type: string
+          format: uri
+          nullable: true
+        previous:
+          title: Previous
+          type: string
+          format: uri
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleRetrieveSerializerV4'
+    CategoryTags:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 30
+          minLength: 1
+          type: string
+        is_selected:
+          title: Is selected
+          type: boolean
+          readOnly: true
+        color:
+          title: Color
+          maxLength: 10
+          type: string
+    Category:
+      required:
+      - name
+      - rank
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+        title:
+          title: Title
+          maxLength: 100
+          minLength: 1
+          type: string
+        description:
+          title: Description
+          type: string
+        tags:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/CategoryTags'
+        rank:
+          title: Rank
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+    Error:
+      required:
+      - error_message
+      - parameter
+      type: object
+      properties:
+        parameter:
+          title: Parameter
+          minLength: 1
+          type: string
+        error_message:
+          title: Error message
+          minLength: 1
+          type: string
+    EventTags:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 30
+          minLength: 1
+          type: string
+        color:
+          title: Color
+          maxLength: 10
+          type: string
+        selected:
+          title: Selected
+          type: boolean
+          readOnly: true
+    EventOccurrence:
+      required:
+      - end_datetime
+      - start_datetime
+      type: object
+      properties:
+        start_datetime:
+          title: Start datetime
+          type: string
+          format: date-time
+        end_datetime:
+          title: End datetime
+          type: string
+          format: date-time
+    EventList:
+      required:
+      - start_date
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        title:
+          title: Titel
+          maxLength: 300
+          minLength: 1
+          type: string
+        content:
+          title: Inhalt
+          type: string
+        image_url:
+          title: Image url
+          type: string
+          readOnly: true
+        image_source:
+          title: Bildquelle
+          maxLength: 200
+          type: string
+          nullable: true
+        start_date:
+          title: Start date
+          type: string
+          format: date-time
+        end_date:
+          title: End date
+          type: string
+          description: "\nGibt das end_datetime der gleichen Occurrence zurück, \n\
+            die für start_date verwendet wurde.\n"
+          format: date-time
+          readOnly: true
+        area:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Area'
+        request_count:
+          title: Anzahl der Anfragen
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        event_location:
+          title: Veranstaltungsort
+          maxLength: 100
+          type: string
+          nullable: true
+        link:
+          title: Link
+          minLength: 1
+          type: string
+          readOnly: true
+        tags:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/EventTags'
+        organization:
+          title: Organization
+          type: integer
+          readOnly: true
+        organization_type:
+          title: Organization type
+          type: string
+          readOnly: true
+        organization_name:
+          title: Organization name
+          type: string
+          readOnly: true
+        organization_image:
+          title: Organization image
+          type: string
+          readOnly: true
+        archived:
+          title: Archived
+          type: boolean
+          readOnly: true
+        bookmarked:
+          title: Bookmarked
+          type: boolean
+          readOnly: true
+        occurrences_list:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/EventOccurrence'
+        longitude:
+          title: Longitude
+          type: string
+          format: decimal
+          nullable: true
+        latitude:
+          title: Latitude
+          type: string
+          format: decimal
+          nullable: true
+        street:
+          title: Straße
+          maxLength: 300
+          type: string
+        town:
+          title: Stadt
+          maxLength: 300
+          type: string
+        zip_code:
+          title: Postleitzahl
+          maxLength: 10
+          type: string
+          nullable: true
+        bookmarked_count:
+          title: Bookmarked count
+          type: integer
+          description: |2
+
+            This method returns the amount of bookmarks for the event.
+          readOnly: true
+        ticket_url:
+          title: Ticket url
+          type: string
+          readOnly: true
+        published:
+          title: Veröffentlicht
+          type: boolean
+    PaginatedEventRetrieve:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        next:
+          title: Next
+          type: string
+          format: uri
+          nullable: true
+        previous:
+          title: Previous
+          type: string
+          format: uri
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventList'
+    EventRetrieve:
+      required:
+      - source
+      - start_date
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        title:
+          title: Titel
+          maxLength: 300
+          minLength: 1
+          type: string
+        content:
+          title: Inhalt
+          type: string
+        image_url:
+          title: Image url
+          type: string
+          readOnly: true
+        image_source:
+          title: Bildquelle
+          maxLength: 200
+          type: string
+          nullable: true
+        start_date:
+          title: Start date
+          type: string
+          format: date-time
+        end_date:
+          title: End date
+          type: string
+          description: "\nGibt das end_datetime der gleichen Occurrence zurück, \n\
+            die für start_date verwendet wurde.\n"
+          format: date-time
+          readOnly: true
+        area:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Area'
+        request_count:
+          title: Anzahl der Anfragen
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        event_location:
+          title: Veranstaltungsort
+          maxLength: 100
+          type: string
+          nullable: true
+        link:
+          title: Link
+          minLength: 1
+          type: string
+          description: |2
+
+            Method to retrieve the 'link' field of the EventV4 instance.
+            This method uses swagger_serializer_method decorator to specify
+            the field type in the Swagger documentation.
+          readOnly: true
+        tags:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/EventTags'
+        organization:
+          title: Organization
+          type: integer
+          readOnly: true
+        organization_type:
+          title: Organization type
+          type: string
+          readOnly: true
+        organization_name:
+          title: Organization name
+          type: string
+          readOnly: true
+        organization_image:
+          title: Organization image
+          type: string
+          readOnly: true
+        source:
+          title: Quelle
+          type: integer
+        archived:
+          title: Archived
+          type: boolean
+          readOnly: true
+        bookmarked:
+          title: Bookmarked
+          type: boolean
+          readOnly: true
+        occurrences_list:
+          title: Occurrences list
+          type: string
+          readOnly: true
+        longitude:
+          title: Longitude
+          type: string
+          format: decimal
+          nullable: true
+        latitude:
+          title: Latitude
+          type: string
+          format: decimal
+          nullable: true
+        street:
+          title: Straße
+          maxLength: 300
+          type: string
+        town:
+          title: Stadt
+          maxLength: 300
+          type: string
+        zip_code:
+          title: Postleitzahl
+          maxLength: 10
+          type: string
+          nullable: true
+        bookmarked_count:
+          title: Bookmarked count
+          type: integer
+          description: |2
+
+            This method returns the amount of bookmarks for the event.
+          readOnly: true
+        ticket_url:
+          title: Ticket url
+          type: string
+          readOnly: true
+    AppUrl:
+      required:
+      - name
+      - url
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+        url:
+          title: Url
+          maxLength: 100
+          minLength: 1
+          type: string
+    ListAppUrl:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppUrl'
+    SourceDelete:
+      required:
+      - source_id
+      type: object
+      properties:
+        source_id:
+          title: Source id
+          type: integer
+          description: Source ID to delete events for
+    FileImport:
+      required:
+      - filename
+      type: object
+      properties:
+        filename:
+          title: Filename
+          minLength: 1
+          type: string
+          description: "Name of the file to import (e.g., events.json)"
+        source_id:
+          title: Source id
+          type: integer
+          description: "Source ID for import (default: 209)"
+    Organization:
+      required:
+      - homepage
+      - image
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        title:
+          title: Titel
+          maxLength: 100
+          type: string
+          nullable: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+        description:
+          title: Beschreibung
+          type: string
+          nullable: true
+        address:
+          title: Adresse
+          type: string
+          nullable: true
+        type:
+          title: Typ
+          type: string
+          enum:
+          - news
+          - official
+          - collective
+        image:
+          title: Image
+          minLength: 1
+          type: string
+        homepage:
+          title: Homepage
+          minLength: 1
+          type: string
+        is_selected:
+          title: Is selected
+          type: boolean
+          nullable: true
+          readOnly: true
+    Source:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+    TagShort:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 30
+          minLength: 1
+          type: string
+    TagCategory:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+        order:
+          title: Order
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+        tags:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/TagShort'
+    TagCategoryShort:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+        order:
+          title: Order
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+    TokenResponse:
+      required:
+      - access
+      - refresh
+      - user_id
+      type: object
+      properties:
+        refresh:
+          title: Refresh
+          minLength: 1
+          type: string
+        access:
+          title: Access
+          minLength: 1
+          type: string
+        user_id:
+          title: User id
+          type: integer
+    TokenRefresh:
+      required:
+      - refresh
+      type: object
+      properties:
+        refresh:
+          title: Refresh
+          minLength: 1
+          type: string
+        access:
+          title: Access
+          minLength: 1
+          type: string
+          readOnly: true
+    ArticleBookmarkedArchived:
+      required:
+      - area
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        title:
+          title: Titel
+          maxLength: 350
+          minLength: 1
+          type: string
+        abstract:
+          title: Abstrakt
+          type: string
+          nullable: true
+        date:
+          title: Date
+          type: string
+          description: |2
+
+            This method returns the date of the article in ISO format.
+            It removes the microseconds from the date before converting it to ISO format.
+          format: date-time
+          readOnly: true
+        image_url:
+          title: Image url
+          type: string
+          readOnly: true
+        area:
+          uniqueItems: true
+          type: array
+          items:
+            title: Gebiet
+            type: integer
+        archived:
+          title: Archived
+          type: boolean
+          description: |2
+
+            This method returns whether the article is archived.
+            It gets the 'archived' attribute from the instance and converts it to a boolean.
+          readOnly: true
+        bookmarked:
+          title: Bookmarked
+          type: boolean
+          description: Return True if the article is bookmarked for the current app_user.
+          readOnly: true
+    PaginatedArticleBookmarkedArchived:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        next:
+          title: Next
+          type: string
+          format: uri
+          nullable: true
+        previous:
+          title: Previous
+          type: string
+          format: uri
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleBookmarkedArchived'
+    PaginatedArticleList:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        next:
+          title: Next
+          type: string
+          format: uri
+          nullable: true
+        previous:
+          title: Previous
+          type: string
+          format: uri
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleList'
+    TagList:
+      type: object
+      properties:
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+    PaginatedArticleRetrieveSerializerUser:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        next:
+          title: Next
+          type: string
+          format: uri
+          nullable: true
+        previous:
+          title: Previous
+          type: string
+          format: uri
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleRetrieveSerializerV4'
+    EventCategory:
+      required:
+      - name
+      - rank
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+        title:
+          title: Title
+          maxLength: 100
+          minLength: 1
+          type: string
+        description:
+          title: Description
+          type: string
+        rank:
+          title: Rank
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+    EventTagListGet:
+      type: object
+      properties:
+        tags:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/CategoryTags'
+        category:
+          $ref: '#/components/schemas/EventCategory'
+        filter_events_by_source:
+          title: Filter events by source
+          type: boolean
+    EventTagList:
+      type: object
+      properties:
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+        filter_events_by_source:
+          title: Filter events by source
+          type: boolean
+    areas:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          maxLength: 100
+          minLength: 1
+          type: string
+    UserGet:
+      required:
+      - username
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        username:
+          title: Benutzername
+          maxLength: 150
+          minLength: 1
+          pattern: "^[\\w.@+-]+$"
+          type: string
+          description: "Erforderlich. 150 Zeichen oder weniger. Nur Buchstaben, Ziffern\
+            \ und @/./+/-/_."
+        first_name:
+          title: Vorname
+          maxLength: 30
+          type: string
+        last_name:
+          title: Nachname
+          maxLength: 150
+          type: string
+        description:
+          title: Description
+          type: string
+          readOnly: true
+        picture:
+          title: Picture
+          type: string
+          readOnly: true
+        image_source:
+          title: Image source
+          type: string
+          readOnly: true
+        email:
+          title: E-Mail-Adresse
+          maxLength: 254
+          type: string
+          format: email
+        homepage:
+          title: Homepage
+          type: string
+          readOnly: true
+        phone:
+          title: Phone
+          maxLength: 20
+          type: string
+          nullable: true
+        display_name:
+          title: Display name
+          maxLength: 100
+          type: string
+          nullable: true
+        area:
+          $ref: '#/components/schemas/areas'
+        town:
+          title: Town
+          type: string
+          readOnly: true
+        street:
+          title: Street
+          type: string
+          readOnly: true
+        zip:
+          title: Zip
+          type: string
+          readOnly: true
+        source_ids:
+          title: Source ids
+          type: string
+          readOnly: true
+        organization_id:
+          title: Organization id
+          type: integer
+          readOnly: true
+    TagPreferenceTag:
+      required:
+      - color
+      - id
+      - name
+      - selected
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        color:
+          title: Color
+          minLength: 1
+          type: string
+        selected:
+          title: Selected
+          type: boolean
+    TagPreferenceArticleCategory:
+      required:
+      - id
+      - name
+      - order
+      - tags
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        order:
+          title: Order
+          type: integer
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagPreferenceTag'
+    TagPreferenceCategory:
+      required:
+      - event_count
+      - id
+      - name
+      - order
+      - tags
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        order:
+          title: Order
+          type: integer
+        event_count:
+          title: Event count
+          type: integer
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagPreferenceTag'
+    EventListSerializerShort:
+      required:
+      - start_date
+      - title
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        title:
+          title: Titel
+          maxLength: 300
+          minLength: 1
+          type: string
+        content:
+          title: Content
+          type: string
+          readOnly: true
+        image_url:
+          title: Image url
+          type: string
+          readOnly: true
+        start_date:
+          title: Start date
+          type: string
+          format: date-time
+        event_location:
+          title: Veranstaltungsort
+          maxLength: 100
+          type: string
+          nullable: true
+        organization:
+          title: Organization
+          type: integer
+          readOnly: true
+        organization_name:
+          title: Organization name
+          type: string
+          readOnly: true
+        organization_image:
+          title: Organization image
+          type: string
+          readOnly: true
+        street:
+          title: Straße
+          maxLength: 300
+          type: string
+        town:
+          title: Stadt
+          maxLength: 300
+          type: string
+        zip_code:
+          title: Postleitzahl
+          maxLength: 10
+          type: string
+          nullable: true
+    PaginatedEventRetrieveSerializerShort:
+      required:
+      - count
+      - results
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        next:
+          title: Next
+          type: string
+          format: uri
+          nullable: true
+        previous:
+          title: Previous
+          type: string
+          format: uri
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventListSerializerShort'
+    UserLocation:
+      type: object
+      properties:
+        location_latitude:
+          title: Location latitude
+          type: string
+          format: decimal
+          nullable: true
+        location_longitude:
+          title: Location longitude
+          type: string
+          format: decimal
+          nullable: true
+        area:
+          title: Gebiet
+          type: integer
+          nullable: true
+    UserOrganizations:
+      type: object
+      properties:
+        organization:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+    UserPush:
+      type: object
+      properties:
+        firebase_token:
+          title: Firebase token
+          maxLength: 300
+          type: string
+          nullable: true
+        push_news:
+          title: Push news
+          type: boolean
+        push_collective:
+          title: Push collective
+          type: boolean
+        push_official:
+          title: Push official
+          type: boolean
+          nullable: true
+    OrganizationChoice:
+      type: object
+      properties:
+        type:
+          title: Type
+          minLength: 1
+          type: string
+          readOnly: true
+        name:
+          title: Name
+          minLength: 1
+          type: string
+          readOnly: true
+        push:
+          title: Push
+          type: boolean
+          readOnly: true
+        all_tags:
+          title: All tags
+          type: integer
+          readOnly: true
+        by_tag:
+          title: By tag
+          type: integer
+          readOnly: true
+        deselected:
+          title: Deselected
+          type: integer
+          readOnly: true
+    Summary:
+      type: object
+      properties:
+        overview:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/OrganizationChoice'
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic

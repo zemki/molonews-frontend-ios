@@ -1,0 +1,703 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F0F3B272F3DF5CC00AAD49C /* Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F3B262F3DF5CC00AAD49C /* Search.framework */; };
+		1F0F3B282F3DF5CC00AAD49C /* Search.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F3B262F3DF5CC00AAD49C /* Search.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A7A2DCE400900438A09 /* Account.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A662DCE400900438A09 /* Account.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A7C2DCE400900438A09 /* Events.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A672DCE400900438A09 /* Events.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A802DCE400900438A09 /* Feed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A692DCE400900438A09 /* Feed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A842DCE400900438A09 /* Participate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A6B2DCE400900438A09 /* Participate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A882DCE400900438A09 /* Watchlist.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A6D2DCE400900438A09 /* Watchlist.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A8C2DCE400A00438A09 /* Atoms.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A6F2DCE400900438A09 /* Atoms.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A8E2DCE400A00438A09 /* Molecules.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A702DCE400900438A09 /* Molecules.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211A922DCE400A00438A09 /* Templates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A722DCE400900438A09 /* Templates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211AB32DCE5AF000438A09 /* Routing.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211AB12DCE5AF000438A09 /* Routing.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F211AEE2DCE666800438A09 /* Explore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211AEC2DCE666800438A09 /* Explore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F2766322E099E82007CD0A2 /* Modifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2766312E099E82007CD0A2 /* Modifiers.framework */; };
+		1F2766332E099E82007CD0A2 /* Modifiers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2766312E099E82007CD0A2 /* Modifiers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F2767802E0ADBFA007CD0A2 /* OrganizationDetail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27677F2E0ADBFA007CD0A2 /* OrganizationDetail.framework */; };
+		1F2767812E0ADBFA007CD0A2 /* OrganizationDetail.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27677F2E0ADBFA007CD0A2 /* OrganizationDetail.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F2768122E0B6679007CD0A2 /* SourceSelection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2768112E0B6679007CD0A2 /* SourceSelection.framework */; };
+		1F2768132E0B6679007CD0A2 /* SourceSelection.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2768112E0B6679007CD0A2 /* SourceSelection.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F27737E2E0E90BA007CD0A2 /* Postings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27737D2E0E90BA007CD0A2 /* Postings.framework */; };
+		1F27737F2E0E90BA007CD0A2 /* Postings.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27737D2E0E90BA007CD0A2 /* Postings.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F3508A92F4372B10028EDEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F3508A82F4372B10028EDEF /* GoogleService-Info.plist */; };
+		1F3508AE2F4373440028EDEF /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3508AD2F4373440028EDEF /* FirebaseMessaging */; };
+		1F523D4D2DDDAFF4003B7F99 /* Assets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F523D4A2DDDAFF4003B7F99 /* Assets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F523D4F2DDDAFF4003B7F99 /* Strings.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F523D4B2DDDAFF4003B7F99 /* Strings.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F52CA602E9568ED0001C330 /* Onboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F52CA5F2E9568ED0001C330 /* Onboarding.framework */; };
+		1F52CA612E9568ED0001C330 /* Onboarding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F52CA5F2E9568ED0001C330 /* Onboarding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F52CBB62E96B54F0001C330 /* LocationSelection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F52CBB52E96B54F0001C330 /* LocationSelection.framework */; };
+		1F52CBB72E96B54F0001C330 /* LocationSelection.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F52CBB52E96B54F0001C330 /* LocationSelection.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F671CF42DD63906009EA90B /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F671CF02DD63906009EA90B /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F671D5A2DD70F48009EA90B /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F671D582DD70F48009EA90B /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F8F794C2DDC71BA00C1C9F3 /* Dimensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8F793A2DDC71BA00C1C9F3 /* Dimensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FA580162DFC056A0015B7E0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA580152DFC056A0015B7E0 /* Kingfisher */; };
+		1FA582522DFC6B150015B7E0 /* ArticleDetail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA582512DFC6B150015B7E0 /* ArticleDetail.framework */; };
+		1FA582532DFC6B150015B7E0 /* ArticleDetail.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA582512DFC6B150015B7E0 /* ArticleDetail.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FA586D92E015EA00015B7E0 /* TopicSelection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA586D82E015EA00015B7E0 /* TopicSelection.framework */; };
+		1FA586DA2E015EA00015B7E0 /* TopicSelection.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA586D82E015EA00015B7E0 /* TopicSelection.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FA58C4E2E044FA60015B7E0 /* EventCategoryList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C4D2E044FA60015B7E0 /* EventCategoryList.framework */; };
+		1FA58C4F2E044FA60015B7E0 /* EventCategoryList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C4D2E044FA60015B7E0 /* EventCategoryList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FA58C512E044FAE0015B7E0 /* EventList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C502E044FAE0015B7E0 /* EventList.framework */; };
+		1FA58C522E044FAE0015B7E0 /* EventList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C502E044FAE0015B7E0 /* EventList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FA58C872E045C070015B7E0 /* Organisms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C862E045C070015B7E0 /* Organisms.framework */; };
+		1FA58C882E045C080015B7E0 /* Organisms.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C862E045C070015B7E0 /* Organisms.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FA58C992E045C590015B7E0 /* ArticleList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C982E045C590015B7E0 /* ArticleList.framework */; };
+		1FA58C9A2E045C590015B7E0 /* ArticleList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA58C982E045C590015B7E0 /* ArticleList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FB8DA3F2E05723800AC572D /* WebContent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB8DA3E2E05723800AC572D /* WebContent.framework */; };
+		1FB8DA402E05723800AC572D /* WebContent.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB8DA3E2E05723800AC572D /* WebContent.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FB8DA9D2E05957E00AC572D /* InAppEmail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB8DA9C2E05957E00AC572D /* InAppEmail.framework */; };
+		1FB8DA9E2E05957E00AC572D /* InAppEmail.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB8DA9C2E05957E00AC572D /* InAppEmail.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FEF54992DDF83CE003E4C4F /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F671D582DD70F48009EA90B /* DataLayer.framework */; };
+		1FEF549A2DDF83CE003E4C4F /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F671CF02DD63906009EA90B /* Domain.framework */; };
+		1FEF549C2DDF83CE003E4C4F /* Routing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211AAB2DCE508100438A09 /* Routing.framework */; };
+		1FEF549D2DDF83CE003E4C4F /* Account.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A662DCE400900438A09 /* Account.framework */; };
+		1FEF549E2DDF83CE003E4C4F /* Events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A672DCE400900438A09 /* Events.framework */; };
+		1FEF549F2DDF83CE003E4C4F /* Explore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A682DCE400900438A09 /* Explore.framework */; };
+		1FEF54A02DDF83CE003E4C4F /* Feed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A692DCE400900438A09 /* Feed.framework */; };
+		1FEF54A12DDF83CE003E4C4F /* Participate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A6B2DCE400900438A09 /* Participate.framework */; };
+		1FEF54A22DDF83CE003E4C4F /* Watchlist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A6D2DCE400900438A09 /* Watchlist.framework */; };
+		1FEF54A32DDF83CE003E4C4F /* Assets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A6E2DCE400900438A09 /* Assets.framework */; };
+		1FEF54A42DDF83CE003E4C4F /* Strings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A712DCE400900438A09 /* Strings.framework */; };
+		1FEF54A52DDF83CE003E4C4F /* Atoms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A6F2DCE400900438A09 /* Atoms.framework */; };
+		1FEF54A62DDF83CE003E4C4F /* Dimensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8F793A2DDC71BA00C1C9F3 /* Dimensions.framework */; };
+		1FEF54A72DDF83CE003E4C4F /* Molecules.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A702DCE400900438A09 /* Molecules.framework */; };
+		1FEF54A82DDF83CE003E4C4F /* Templates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F211A722DCE400900438A09 /* Templates.framework */; };
+		1FEF55D72DE48023003E4C4F /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1FEF55D62DE48023003E4C4F /* FactoryKit */; };
+		9F4717B22E02F0F900186386 /* EventDetails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4717B12E02F0F900186386 /* EventDetails.framework */; };
+		9F4717B32E02F0F900186386 /* EventDetails.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4717B12E02F0F900186386 /* EventDetails.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1F2119A12DCE36A100438A09 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1F211A7C2DCE400900438A09 /* Events.framework in Embed Frameworks */,
+				1F52CA612E9568ED0001C330 /* Onboarding.framework in Embed Frameworks */,
+				1F523D4D2DDDAFF4003B7F99 /* Assets.framework in Embed Frameworks */,
+				1F211AB32DCE5AF000438A09 /* Routing.framework in Embed Frameworks */,
+				1F8F794C2DDC71BA00C1C9F3 /* Dimensions.framework in Embed Frameworks */,
+				1F52CBB72E96B54F0001C330 /* LocationSelection.framework in Embed Frameworks */,
+				1F211A842DCE400900438A09 /* Participate.framework in Embed Frameworks */,
+				1F211A7A2DCE400900438A09 /* Account.framework in Embed Frameworks */,
+				1F2767812E0ADBFA007CD0A2 /* OrganizationDetail.framework in Embed Frameworks */,
+				1F0F3B282F3DF5CC00AAD49C /* Search.framework in Embed Frameworks */,
+				1FA58C882E045C080015B7E0 /* Organisms.framework in Embed Frameworks */,
+				1F211A8E2DCE400A00438A09 /* Molecules.framework in Embed Frameworks */,
+				1FA582532DFC6B150015B7E0 /* ArticleDetail.framework in Embed Frameworks */,
+				1FA58C4F2E044FA60015B7E0 /* EventCategoryList.framework in Embed Frameworks */,
+				1F211A802DCE400900438A09 /* Feed.framework in Embed Frameworks */,
+				1F211A8C2DCE400A00438A09 /* Atoms.framework in Embed Frameworks */,
+				1F211AEE2DCE666800438A09 /* Explore.framework in Embed Frameworks */,
+				1F671CF42DD63906009EA90B /* Domain.framework in Embed Frameworks */,
+				1F2768132E0B6679007CD0A2 /* SourceSelection.framework in Embed Frameworks */,
+				1F2766332E099E82007CD0A2 /* Modifiers.framework in Embed Frameworks */,
+				1FA58C9A2E045C590015B7E0 /* ArticleList.framework in Embed Frameworks */,
+				1F523D4F2DDDAFF4003B7F99 /* Strings.framework in Embed Frameworks */,
+				1FB8DA402E05723800AC572D /* WebContent.framework in Embed Frameworks */,
+				1FB8DA9E2E05957E00AC572D /* InAppEmail.framework in Embed Frameworks */,
+				1F211A882DCE400900438A09 /* Watchlist.framework in Embed Frameworks */,
+				9F4717B32E02F0F900186386 /* EventDetails.framework in Embed Frameworks */,
+				1F211A922DCE400A00438A09 /* Templates.framework in Embed Frameworks */,
+				1FA58C522E044FAE0015B7E0 /* EventList.framework in Embed Frameworks */,
+				1F671D5A2DD70F48009EA90B /* DataLayer.framework in Embed Frameworks */,
+				1FA586DA2E015EA00015B7E0 /* TopicSelection.framework in Embed Frameworks */,
+				1F27737F2E0E90BA007CD0A2 /* Postings.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1F0F3B262F3DF5CC00AAD49C /* Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F2118E82DCE262100438A09 /* moloApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moloApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A632DCE400900438A09 /* Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A642DCE400900438A09 /* Notifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Notifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A652DCE400900438A09 /* Repository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Repository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A662DCE400900438A09 /* Account.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Account.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A672DCE400900438A09 /* Events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A682DCE400900438A09 /* Explore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Explore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A692DCE400900438A09 /* Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A6A2DCE400900438A09 /* Onboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Onboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A6B2DCE400900438A09 /* Participate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Participate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A6C2DCE400900438A09 /* Posting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Posting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A6D2DCE400900438A09 /* Watchlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Watchlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A6E2DCE400900438A09 /* Assets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Assets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A6F2DCE400900438A09 /* Atoms.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atoms.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A702DCE400900438A09 /* Molecules.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Molecules.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A712DCE400900438A09 /* Strings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Strings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211A722DCE400900438A09 /* Templates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Templates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211AAB2DCE508100438A09 /* Routing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Routing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211AAE2DCE5AB600438A09 /* Routing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Routing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211AB12DCE5AF000438A09 /* Routing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Routing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211AEC2DCE666800438A09 /* Explore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Explore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F211B1D2DD329AF00438A09 /* MoloAPIClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MoloAPIClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F2766312E099E82007CD0A2 /* Modifiers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Modifiers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F2766A82E09A61F007CD0A2 /* Posting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Posting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F27677F2E0ADBFA007CD0A2 /* OrganizationDetail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OrganizationDetail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F2768112E0B6679007CD0A2 /* SourceSelection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SourceSelection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F2772162E0D8DFC007CD0A2 /* MoloLegacy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MoloLegacy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F27737D2E0E90BA007CD0A2 /* Postings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Postings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F3508A82F4372B10028EDEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1F523D4A2DDDAFF4003B7F99 /* Assets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Assets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F523D4B2DDDAFF4003B7F99 /* Strings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Strings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F52CA5F2E9568ED0001C330 /* Onboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Onboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F52CBB52E96B54F0001C330 /* LocationSelection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LocationSelection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F671CEF2DD63906009EA90B /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F671CF02DD63906009EA90B /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F671D582DD70F48009EA90B /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F8F793A2DDC71BA00C1C9F3 /* Dimensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Dimensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA582512DFC6B150015B7E0 /* ArticleDetail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ArticleDetail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA586D82E015EA00015B7E0 /* TopicSelection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TopicSelection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA58C4D2E044FA60015B7E0 /* EventCategoryList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EventCategoryList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA58C502E044FAE0015B7E0 /* EventList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EventList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA58C862E045C070015B7E0 /* Organisms.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Organisms.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA58C982E045C590015B7E0 /* ArticleList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ArticleList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FB8DA3E2E05723800AC572D /* WebContent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebContent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FB8DA9C2E05957E00AC572D /* InAppEmail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = InAppEmail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FEF56302DE4A6D7003E4C4F /* DI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F4717B12E02F0F900186386 /* EventDetails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EventDetails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1F2772E72E0DA0D8007CD0A2 /* Exceptions for "moloApp" folder in "moloApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1F2118E72DCE262100438A09 /* moloApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1F2118EA2DCE262100438A09 /* moloApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1F2772E72E0DA0D8007CD0A2 /* Exceptions for "moloApp" folder in "moloApp" target */,
+			);
+			path = moloApp;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F2118E52DCE262100438A09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FEF55D72DE48023003E4C4F /* FactoryKit in Frameworks */,
+				1F2766322E099E82007CD0A2 /* Modifiers.framework in Frameworks */,
+				1FA58C4E2E044FA60015B7E0 /* EventCategoryList.framework in Frameworks */,
+				1FB8DA9D2E05957E00AC572D /* InAppEmail.framework in Frameworks */,
+				1F0F3B272F3DF5CC00AAD49C /* Search.framework in Frameworks */,
+				1F27737E2E0E90BA007CD0A2 /* Postings.framework in Frameworks */,
+				1FEF54992DDF83CE003E4C4F /* DataLayer.framework in Frameworks */,
+				9F4717B22E02F0F900186386 /* EventDetails.framework in Frameworks */,
+				1FEF549A2DDF83CE003E4C4F /* Domain.framework in Frameworks */,
+				1FB8DA3F2E05723800AC572D /* WebContent.framework in Frameworks */,
+				1FEF549C2DDF83CE003E4C4F /* Routing.framework in Frameworks */,
+				1FA586D92E015EA00015B7E0 /* TopicSelection.framework in Frameworks */,
+				1FA582522DFC6B150015B7E0 /* ArticleDetail.framework in Frameworks */,
+				1FEF549D2DDF83CE003E4C4F /* Account.framework in Frameworks */,
+				1FEF549E2DDF83CE003E4C4F /* Events.framework in Frameworks */,
+				1FEF549F2DDF83CE003E4C4F /* Explore.framework in Frameworks */,
+				1FA58C872E045C070015B7E0 /* Organisms.framework in Frameworks */,
+				1FEF54A02DDF83CE003E4C4F /* Feed.framework in Frameworks */,
+				1FEF54A12DDF83CE003E4C4F /* Participate.framework in Frameworks */,
+				1F52CA602E9568ED0001C330 /* Onboarding.framework in Frameworks */,
+				1F2767802E0ADBFA007CD0A2 /* OrganizationDetail.framework in Frameworks */,
+				1FEF54A22DDF83CE003E4C4F /* Watchlist.framework in Frameworks */,
+				1F2768122E0B6679007CD0A2 /* SourceSelection.framework in Frameworks */,
+				1FEF54A32DDF83CE003E4C4F /* Assets.framework in Frameworks */,
+				1FA580162DFC056A0015B7E0 /* Kingfisher in Frameworks */,
+				1F52CBB62E96B54F0001C330 /* LocationSelection.framework in Frameworks */,
+				1F3508AE2F4373440028EDEF /* FirebaseMessaging in Frameworks */,
+				1FA58C992E045C590015B7E0 /* ArticleList.framework in Frameworks */,
+				1FEF54A42DDF83CE003E4C4F /* Strings.framework in Frameworks */,
+				1FEF54A52DDF83CE003E4C4F /* Atoms.framework in Frameworks */,
+				1FEF54A62DDF83CE003E4C4F /* Dimensions.framework in Frameworks */,
+				1FEF54A72DDF83CE003E4C4F /* Molecules.framework in Frameworks */,
+				1FEF54A82DDF83CE003E4C4F /* Templates.framework in Frameworks */,
+				1FA58C512E044FAE0015B7E0 /* EventList.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F2118DF2DCE262100438A09 = {
+			isa = PBXGroup;
+			children = (
+				1F2118EA2DCE262100438A09 /* moloApp */,
+				1F211A622DCE400900438A09 /* Frameworks */,
+				1F2118E92DCE262100438A09 /* Products */,
+				1F3508A82F4372B10028EDEF /* GoogleService-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		1F2118E92DCE262100438A09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F2118E82DCE262100438A09 /* moloApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F211A622DCE400900438A09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F0F3B262F3DF5CC00AAD49C /* Search.framework */,
+				1F52CBB52E96B54F0001C330 /* LocationSelection.framework */,
+				1F52CA5F2E9568ED0001C330 /* Onboarding.framework */,
+				1F27737D2E0E90BA007CD0A2 /* Postings.framework */,
+				1F2772162E0D8DFC007CD0A2 /* MoloLegacy.framework */,
+				1F2768112E0B6679007CD0A2 /* SourceSelection.framework */,
+				1F27677F2E0ADBFA007CD0A2 /* OrganizationDetail.framework */,
+				1F2766A82E09A61F007CD0A2 /* Posting.framework */,
+				1F2766312E099E82007CD0A2 /* Modifiers.framework */,
+				1FB8DA9C2E05957E00AC572D /* InAppEmail.framework */,
+				1FB8DA3E2E05723800AC572D /* WebContent.framework */,
+				1FA58C982E045C590015B7E0 /* ArticleList.framework */,
+				1FA58C862E045C070015B7E0 /* Organisms.framework */,
+				1FA58C502E044FAE0015B7E0 /* EventList.framework */,
+				1FA58C4D2E044FA60015B7E0 /* EventCategoryList.framework */,
+				9F4717B12E02F0F900186386 /* EventDetails.framework */,
+				1FA586D82E015EA00015B7E0 /* TopicSelection.framework */,
+				1FA582512DFC6B150015B7E0 /* ArticleDetail.framework */,
+				1FEF56302DE4A6D7003E4C4F /* DI.framework */,
+				1F523D4A2DDDAFF4003B7F99 /* Assets.framework */,
+				1F523D4B2DDDAFF4003B7F99 /* Strings.framework */,
+				1F8F793A2DDC71BA00C1C9F3 /* Dimensions.framework */,
+				1F671D582DD70F48009EA90B /* DataLayer.framework */,
+				1F671CEF2DD63906009EA90B /* Data.framework */,
+				1F671CF02DD63906009EA90B /* Domain.framework */,
+				1F211B1D2DD329AF00438A09 /* MoloAPIClient.framework */,
+				1F211AEC2DCE666800438A09 /* Explore.framework */,
+				1F211AB12DCE5AF000438A09 /* Routing.framework */,
+				1F211AAE2DCE5AB600438A09 /* Routing.framework */,
+				1F211AAB2DCE508100438A09 /* Routing.framework */,
+				1F211A632DCE400900438A09 /* Navigation.framework */,
+				1F211A642DCE400900438A09 /* Notifications.framework */,
+				1F211A652DCE400900438A09 /* Repository.framework */,
+				1F211A662DCE400900438A09 /* Account.framework */,
+				1F211A672DCE400900438A09 /* Events.framework */,
+				1F211A682DCE400900438A09 /* Explore.framework */,
+				1F211A692DCE400900438A09 /* Feed.framework */,
+				1F211A6A2DCE400900438A09 /* Onboarding.framework */,
+				1F211A6B2DCE400900438A09 /* Participate.framework */,
+				1F211A6C2DCE400900438A09 /* Posting.framework */,
+				1F211A6D2DCE400900438A09 /* Watchlist.framework */,
+				1F211A6E2DCE400900438A09 /* Assets.framework */,
+				1F211A6F2DCE400900438A09 /* Atoms.framework */,
+				1F211A702DCE400900438A09 /* Molecules.framework */,
+				1F211A712DCE400900438A09 /* Strings.framework */,
+				1F211A722DCE400900438A09 /* Templates.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F2118E72DCE262100438A09 /* moloApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F2118F32DCE262200438A09 /* Build configuration list for PBXNativeTarget "moloApp" */;
+			buildPhases = (
+				1FA5801E2DFC09C00015B7E0 /* Run Script (swiftgen) */,
+				1F2118E42DCE262100438A09 /* Sources */,
+				1F2118E52DCE262100438A09 /* Frameworks */,
+				1F2118E62DCE262100438A09 /* Resources */,
+				1F2119A12DCE36A100438A09 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1F2118EA2DCE262100438A09 /* moloApp */,
+			);
+			name = moloApp;
+			packageProductDependencies = (
+				1FEF55D62DE48023003E4C4F /* FactoryKit */,
+				1FA580152DFC056A0015B7E0 /* Kingfisher */,
+				1F3508AD2F4373440028EDEF /* FirebaseMessaging */,
+			);
+			productName = moloApp;
+			productReference = 1F2118E82DCE262100438A09 /* moloApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1F2118E02DCE262100438A09 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					1F2118E72DCE262100438A09 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+				};
+			};
+			buildConfigurationList = 1F2118E32DCE262100438A09 /* Build configuration list for PBXProject "moloApp" */;
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				de,
+				Base,
+			);
+			mainGroup = 1F2118DF2DCE262100438A09;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1FEF55D52DE48023003E4C4F /* XCRemoteSwiftPackageReference "Factory" */,
+				1FA580142DFC056A0015B7E0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				1F3508AC2F4373440028EDEF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1F2118E92DCE262100438A09 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F2118E72DCE262100438A09 /* moloApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1F2118E62DCE262100438A09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F3508A92F4372B10028EDEF /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FA5801E2DFC09C00015B7E0 /* Run Script (swiftgen) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (swiftgen)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftgen >/dev/null; then\n    swiftgen config run --config ${PROJECT_DIR}/../moloResources/swiftgen.yml\nelse\n    echo \"warning: SwiftGen not installed. Run 'brew install swiftgen'\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1F2118E42DCE262100438A09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1F2118F12DCE262200438A09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1F2118F22DCE262200438A09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F2118F42DCE262200438A09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = moloApp/moloApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20260228;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = moloApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = molo;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Sichere Events direkt in deinem Kalender.";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Sichere Events direkt in deinem Kalender.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Mache Fotos für deine Posts.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Nutze die Ortungsfunktion, um Beiträge aus deiner Region zu erhalten.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Suche mit deiner Stimme.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Wähle Fotos für deine Posts.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Suche nach Events und Artikeln per Spracheingabe.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 6.2.0;
+				MERGED_BINARY_TYPE = none;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = news.molo.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1F2118F52DCE262200438A09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = moloApp/moloApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20260228;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = moloApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = molo;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Sichere Events direkt in deinem Kalender.";
+				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Sichere Events direkt in deinem Kalender.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Mache Fotos für deine Posts.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Nutze die Ortungsfunktion, um Beiträge aus deiner Region zu erhalten.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Suche mit deiner Stimme.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Wähle Fotos für deine Posts.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Suche nach Events und Artikeln per Spracheingabe.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 6.2.0;
+				MERGED_BINARY_TYPE = none;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = news.molo.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F2118E32DCE262100438A09 /* Build configuration list for PBXProject "moloApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F2118F12DCE262200438A09 /* Debug */,
+				1F2118F22DCE262200438A09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F2118F32DCE262200438A09 /* Build configuration list for PBXNativeTarget "moloApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F2118F42DCE262200438A09 /* Debug */,
+				1F2118F52DCE262200438A09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1F3508AC2F4373440028EDEF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.9.0;
+			};
+		};
+		1FA580142DFC056A0015B7E0 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
+		1FEF55D52DE48023003E4C4F /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1F3508AD2F4373440028EDEF /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F3508AC2F4373440028EDEF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		1FA580152DFC056A0015B7E0 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FA580142DFC056A0015B7E0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		1FEF55D62DE48023003E4C4F /* FactoryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FEF55D52DE48023003E4C4F /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1F2118E02DCE262100438A09 /* Project object */;
+}

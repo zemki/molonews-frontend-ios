@@ -1,0 +1,244 @@
+/* 
+  Localizable.strings
+  moloUI
+*/
+
+// Navigation
+
+"news.molo.tabbar.explore" = "Explore";
+"news.molo.tabbar.events" = "Events";
+"news.molo.tabbar.feed" = "Feed";
+"news.molo.tabbar.watchlist" = "Gemerkt";
+"news.molo.tabbar.participate" = "Mehr";
+"news.molo.tabbar.search" = "Suche";
+
+"news.molo.loading.progress" = "Lade...";
+
+"news.molo.search.hint" = "Suche";
+"news.molo.search.ai.hint" = "KI-Suche (z. B. Was, Wann, Wo)";
+
+"news.molo.time.appendix" = "Uhr";
+
+"news.molo.share.event" = "Dieses Event habe ich in der molo App gefunden:\n%@\n%@";
+"news.molo.share.article" = "Diese News habe ich in der molo App gefunden:\n%@\n%@";
+"news.molo.share.links" = "\n\nDu kannst die App im App-Store (https://apps.apple.com/us/app/molo.news/id1486601544?l=de&ls=1) und bei Google Play (https://play.google.com/store/apps/details?id=news.molo.android) laden.";
+
+"news.molo.report.article" = "Artikel melden";
+"news.molo.report.event" = "Event melden";
+
+"news.molo.event.save" = "In Kalender importieren";
+
+"news.molo.notification.general.error" = "Fehler bei der Datenübermittlung";
+"news.molo.notification.location.notFound" = "Ort konnte nicht abgerufen werden";
+"news.molo.notification.article.reported" = "Artikel wurde gemeldet";
+"news.molo.notification.event.reported" = "Event wurde gemeldet";
+"news.molo.notification.event.noAccess" = "Der Zugriff auf den Kalendar muss erlaubt werden.";
+"news.molo.notification.login.success" = "Du bist jetzt eingeloggt.";
+"news.molo.notification.profile.error" = "Profil konnte nicht geladen werden.";
+"news.molo.notification.push.error" = "Push konnte nicht aktiviert werden.";
+
+"news.molo.topics.title" = "Meine Themen";
+"news.molo.topics.selectAll" = "Alle";
+
+"news.molo.watchlist.articles.tab" = "Gemerkte Posts";
+"news.molo.watchlist.events.tab" = "Gemerkte Events";
+
+"news.molo.search.articles.tab" = "Artikel";
+"news.molo.search.events.tab" = "Events";
+"news.molo.search.history.title" = "Zuletzt gesucht";
+"news.molo.search.history.clear" = "Suchverlauf löschen";
+
+"news.molo.tags.articles.tab" = "Artikel Themen";
+"news.molo.tags.events.tab" = "Event Themen";
+
+"news.molo.menu.sources" = "Meine Quellen";
+"news.molo.menu.feedback" = "Feedback und Kontakt";
+"news.molo.menu.info" = "Über molo.news";
+"news.molo.menu.privacy" = "Datenschutzerklärung";
+"news.molo.menu.imprint" = "Impressum";
+"news.molo.menu.terms" = "Nutzungsbedingungen";
+"news.molo.menu.darkMode" = "Dunkles Design";
+
+"news.molo.button.login" = "Anmelden / Registieren";
+"news.molo.button.logout" = "Abmelden";
+"news.molo.button.deleteAccount" = "Account löschen";
+
+"news.molo.url.info" = "https://www.molo.news/";
+"news.molo.url.privacy" = "https://molo.news/datenschutz.html";
+"news.molo.url.imprint" = "https://molo.news/impressum.html";
+"news.molo.url.terms" = "https://molo.news/nutzungsbedingungen.html";
+
+"news.molo.email.to" = "molonews@uni-bremen.de";
+"news.molo.email.subject" = "Feedback";
+"news.molo.email.content" = "Welches Feedback zur App oder Infos und Neuigkeiten möchtest du molo melden?\n\nDeine Nachricht:";
+
+"news.molo.posting.title" = "Posting";
+"news.molo.posting.article" = "Artikel posten";
+"news.molo.posting.event" = "Event posten";
+"news.molo.posting.article.title.placeholder" = "Überschrift / Titel";
+"news.molo.posting.event.title.placeholder" = "Event-Titel";
+"news.molo.posting.article.description.placeholder" = "Was gibt es Neues in deinem Ort?";
+"news.molo.posting.event.description.placeholder" = "Infos zur Veranstaltung: Wer, Was, Wann, Wo und warum?";
+"news.molo.posting.event.venue.placeholder" = "Spielstätte / Veranstaltungsort";
+"news.molo.posting.event.address.placeholder" = "Adresse";
+"news.molo.posting.event.date.placeholder" = "Datum und Uhrzeit";
+"news.molo.posting.article.link.placeholder" = "Artikel-Link (optional)";
+"news.molo.posting.event.link.placeholder" = "Event-Link (optional)";
+"news.molo.posting.event.ticketLink.placeholder" = "Ticket-Link (optional)";
+"news.molo.posting.topics" = "Themen";
+"news.molo.posting.topics.description" = "Wähle die Themen, die zu deinem Post passen. Unsere molo-KI hat schon mal ein paar Vorschläge gemacht.";
+"news.molo.posting.post.action" = "Beitrag veröffentlichen";
+"news.molo.posting.draft.action" = "Entwurf speichern";
+"news.molo.posting.pickImage.action" = "Foto hochladen";
+"news.molo.posting.takePhoto.action" = "Fotografieren";
+"news.molo.posting.done.action" = "Fertig";
+
+"news.molo.posting.image.alert.title" = "Bildquelle angeben";
+"news.molo.posting.image.alert.placeholder" = "Bildquelle";
+"news.molo.posting.image.alert.ok" = "Übernehmen";
+
+"news.molo.posting.cancel.alert.title" = "Ungespeicherte Änderungen";
+"news.molo.posting.cancel.alert.message" = "Du hast ungespeicherte Änderungen. Wenn du jetzt zurückgehst, geht dein Fortschritt verloren.";
+"news.molo.posting.cancel.alert.delete" = "Änderungen verwerfen";
+"news.molo.posting.cancel.alert.save" = "Entwurf speichern";
+
+"news.molo.profile.cancel.alert.title" = "Ungespeicherte Änderungen";
+"news.molo.profile.cancel.alert.message" = "Du hast ungespeicherte Änderungen. Wenn du jetzt zurückgehst, gehen deine Änderungen verloren.";
+"news.molo.profile.cancel.alert.delete" = "Änderungen verwerfen";
+"news.molo.profile.cancel.alert.save" = "Profil speichern";
+
+"news.molo.posting.incomplete.alert.title" = "Unvollständige Angaben";
+"news.molo.posting.incomplete.alert.message" = "Bitte mache folgende Angaben:\n%@";
+"news.molo.posting.incomplete.alert.ok" = "OK";
+
+"news.molo.postings.articles.tab" = "Meine Posts";
+"news.molo.postings.events.tab" = "Meine Events";
+
+"news.molo.organizationDetail.articles.tab" = "Beiträge der letzten Tage";
+"news.molo.organizationDetail.events.tab" = "Kommende Events";
+"news.molo.organizationDetail.user.articles.tab" = "Meine Artikel-Posts";
+"news.molo.organizationDetail.user.events.tab" = "Meine Event-Posts";
+
+"news.molo.sources.title" = "Meine Quellen";
+"news.molo.sources.news.title" = "Medien";
+"news.molo.sources.officials.title" = "Offizielle";
+"news.molo.sources.collectives.title" = "Community";
+"news.molo.sources.action.follow" = "Folgen";
+"news.molo.sources.action.unfollow" = "Entfolgen";
+
+"news.molo.event.category.empty" = "Keine Events für deine Auswahl";
+"news.molo.event.detail.subheader" = "Location & Themen";
+"news.molo.event.detail.tickets" = "Tickets kaufen";
+"news.molo.event.detail.website" = "Zur Event-Website";
+
+"news.molo.event.filter.today" = "Heute";
+"news.molo.event.filter.tomorrow" = "Morgen";
+"news.molo.event.filter.weekend" = "Wochenende";
+"news.molo.event.filter.calendar" = "Kalender";
+
+"news.molo.event.calendar.select" = "Wähle einen Zeitraum";
+"news.molo.event.calendar.startDate" = "Startdatum";
+"news.molo.event.calendar.start" = "Start";
+"news.molo.event.calendar.endDate" = "Enddatum";
+"news.molo.event.calendar.end" = "Ende";
+"news.molo.event.calendar.selectedSpan" = "Gewählter Zeitraum:";
+"news.molo.event.calendar.ok" = "Ok";
+"news.molo.event.calendar.cancel" = "Abbrechen";
+
+"news.molo.account.delete.alert.title" = "Account löschen?";
+"news.molo.account.delete.alert.message" = "Wenn du deinen Account löschst, werden alle von dir erstellten Inhalte gelöscht.";
+"news.molo.account.delete.alert.ok" = "Löschen";
+"news.molo.account.delete.alert.cancel" = "Abbrechen";
+
+"news.molo.posting.delete.alert.title" = "Beitrag löschen?";
+"news.molo.posting.delete.alert.message" = "Möchtest du diesen Beitrag unwiderruflich löschen?";
+"news.molo.posting.delete.alert.ok" = "Löschen";
+"news.molo.posting.delete.alert.cancel" = "Abbrechen";
+
+"news.molo.events.time.appendix" = " Uhr";
+
+"url.app.delegate.activate" = "activate";
+"url.app.delegate.password.reset" = "password-reset";
+"url.app.delegate.reset.token" = "token";
+"url.app.delegate.activated" = "already-activated";
+"url.app.delegate.bearer.token" = "bearer";
+
+"storage.app.darkMode" = "isDarkMode";
+
+"news.molo.registration.input.email" = "E-Mail";
+"news.molo.registration.input.password" = "Passwort";
+"news.molo.registration.input.prename" = "Vorname";
+"news.molo.registration.input.lastname" = "Nachname";
+"news.molo.registration.input.displayName" = "Anzeigename";
+
+"news.molo.profile.title.public" = "Öffentliche Informationen";
+"news.molo.profile.title.private" = "Private Informationen";
+"news.molo.profile.input.prename" = "Vorname";
+"news.molo.profile.input.lastname" = "Nachname";
+"news.molo.profile.input.displayName" = "Anzeigename";
+"news.molo.profile.input.description" = "Selbstbeschreibung";
+"news.molo.profile.input.location" = "Ort";
+"news.molo.profile.input.email" = "Email";
+"news.molo.profile.input.homepage" = "Homepage";
+"news.molo.profile.action.save" = "Änderungen speichern";
+
+"news.molo.profile.photo.dialog.title" = "Profilbild";
+"news.molo.profile.photo.dialog.message" = "Was möchtest du tun?";
+"news.molo.profile.photo.dialog.action.new" = "Neues Foto hochladen";
+"news.molo.profile.photo.dialog.action.delete" = "Foto löschen";
+
+"news.molo.registration.text.title" = "Anmelden";
+"news.molo.registration.text.description" = "Du möchtest selbst lokale Infos und Events bei molo veröffentlichen? Dann melde dich an und poste direkt über die App.";
+"news.molo.registration.text.terms.prefix" = "Ich bestätige hiermit, dass ich die ";
+"news.molo.registration.text.terms.link" = "[Nutzungsbedingungen](https://www.molo.news/nutzungsbedingungen.html)";
+"news.molo.registration.text.terms.postfix" = " gelesen und verstanden habe.";
+"news.molo.registration.button.submit" = "Konto erstellen";
+
+"news.molo.login.input.email" = "E-Mail";
+"news.molo.login.input.password" = "Passwort";
+
+"news.molo.login.text.title" = "Anmelden";
+"news.molo.login.text.description" = "Du möchtest selbst lokale Infos und Events bei molo veröffentlichen? Dann melde dich an und poste direkt über die App.";
+"news.molo.login.button.submit" = "Anmelden";
+"news.molo.login.button.register" = "Konto erstellen";
+"news.molo.login.button.passwordLost" = "Passwort vergessen?";
+
+"news.molo.passwordLost.input.email" = "E-Mail";
+
+"news.molo.passwordLost.text.title" = "Passwort vergessen?";
+"news.molo.passwordLost.text.description" = "Lass dir einen Link an deine E-Mail-Adresse senden, um das Passwort zurückzusetzen.";
+"news.molo.passwordLost.button.submit" = "Passwort Link anfordern";
+
+"news.molo.passwordRenewal.input.password" = "Neues Passwort";
+"news.molo.passwordRenewal.input.passwordConfirmation" = "Neues Passwort bestätigen";
+
+"news.molo.passwordRenewal.text.title" = "Neues Passwort vergeben";
+"news.molo.passwordRenewal.text.description" = "Gib dein neues Passwort ein, mit dem du dich zukünftig anmelden willst.";
+"news.molo.passwordRenewal.button.submit" = "Passwort speichern";
+
+"news.molo.registration.confirmation.text.title" = "Willkommen bei Molo!";
+"news.molo.registration.confirmation.text.description" = "Wir haben dir eine E-Mail mit einem Bestätigungslink gesendet. Bitte gehe zu deinem E-Mail-Postfach, um deinen Account freizuschalten.";
+
+"news.molo.onboarding.step1.title1" = "Dein Ort,\n";
+"news.molo.onboarding.step1.title2" = "deine Themen.";
+"news.molo.onboarding.step1.description" = "Infos zum Leben vor deiner Haustür gehen zwischen den Posts aus aller Welt oft unter.\nSchade eigentlich. molo rückt die Themen deines Ortes wieder in den Mittelpunkt.";
+"news.molo.onboarding.step1.next" = "Weiter";
+
+"news.molo.onboarding.step2.title1" = "Du setzt\n";
+"news.molo.onboarding.step2.title2" = "den Fokus.";
+"news.molo.onboarding.step2.description" = "Bestimme einen Ort oder teile deinen Standort, um lokale Meldungen zu erhalten und Veranstaltungen zu finden. Unabhängig, werbefrei und aktuell.";
+"news.molo.onboarding.step2.next" = "Ort wählen";
+
+"news.molo.onboarding.step3.title1" = "Dein Feed,\n";
+"news.molo.onboarding.step3.title2" = "deine Inhalte.";
+"news.molo.onboarding.step3.description" = "Von Sport über Konzerte bis zum politischen Geschehen: Welche Themen sollen in deinem Feed erscheinen – welche nicht? Du bestimmst.";
+"news.molo.onboarding.step3.next" = "Interessen wählen";
+
+"news.molo.onboarding.step4.title1" = "Willkommen\n";
+"news.molo.onboarding.step4.title2" = "bei molo!";
+"news.molo.onboarding.step4.description" = "molo bündelt Informationen und Events aus deinem Ort und macht lokale Stimmen sichtbar. Aktiviere Benachrichtigungen und bleibe mit molo auf dem Laufenden.";
+"news.molo.onboarding.step4.next" = "Los geht's";
+
+"news.molo.location.radius" = "Umkreis";
+"news.molo.location.km" = "km";
+"news.molo.location.submit" = "Auswählen";

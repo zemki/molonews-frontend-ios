@@ -1,0 +1,34 @@
+xcassets:
+  - inputs:
+      - Assets/Colors.xcassets
+    outputs:
+      templateName: swift5
+      output: Assets/Generated/Colors.generated.swift
+      params:
+        enumName: "Colors"
+        swiftui: true
+        publicAccess: true
+        forceProvidesNamespaces: true
+        ignoreEmptySubdirectories: true
+
+  - inputs:
+      - Assets/Icons.xcassets
+      - Assets/Images.xcassets
+    outputs:
+      templateName: swift5
+      output: Assets/Generated/Assets.generated.swift
+      params:
+        enumName: "Assets"
+        swiftui: true
+        publicAccess: true
+        forceProvidesNamespaces: true
+        ignoreEmptySubdirectories: true
+
+strings:
+  inputs:
+    - Strings/de.lproj/Localizable.strings
+  outputs:
+    templateName: structured-swift5
+    output: Strings/Generated/Strings.generated.swift
+    params:
+      publicAccess: true
